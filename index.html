@@ -3,34 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz de TI - Daniela Leão da Silva</title>
+  <title>Portfólio - Daniela Leão da Silva</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-900 text-white relative overflow-x-hidden">
 
   <!-- Fundo tecnológico -->
-  <div class="absolute inset-0 bg-cover bg-center" 
-       style="background-image: url('assets/fundo.jpg'); filter: brightness(0.4);"></div>
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/fundo.jpg'); filter: brightness(0.4);"></div>
 
   <!-- Conteúdo -->
   <div class="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-4">
 
     <!-- Navegação -->
     <nav class="absolute top-6 left-1/2 transform -translate-x-1/2 flex space-x-6 text-lg font-medium">
-      <a href="index.html" class="hover:text-cyan-400 transition">Início</a>
-      <a href="quiz.html" class="hover:text-cyan-400 transition">Quiz de TI</a>
+      <a href="#inicio" class="hover:text-cyan-400 transition">Início</a>
+      <a href="#projetos" class="hover:text-cyan-400 transition">Projetos</a>
+      <a href="#quiz-section" class="hover:text-cyan-400 transition">Quiz de TI</a>
     </nav>
 
-    <!-- Quiz Container -->
-    <div class="bg-gray-800 bg-opacity-90 rounded-xl p-8 w-full max-w-lg animate-fadeIn">
-      <h1 class="text-3xl font-bold mb-6 text-cyan-400">Quiz Interativo de TI</h1>
+    <!-- Header -->
+    <header id="inicio" class="mb-12 animate-fadeIn">
+      <h1 class="text-5xl md:text-6xl font-bold mb-4">Daniela Leão da Silva</h1>
+      <p class="text-xl md:text-2xl mb-6">Profissional de TI | Cloud | Infraestrutura | Redes</p>
+      <a href="assets/Curriculo-Daniela-Profissional.pdf" 
+         class="px-6 py-3 bg-cyan-500 rounded-lg hover:bg-cyan-600 transition transform hover:scale-105" 
+         download>
+         📄 Baixar Currículo
+      </a>
+    </header>
+
+    <!-- Sobre Mim -->
+    <section class="max-w-3xl mb-16 animate-fadeUp">
+      <h2 class="text-3xl font-semibold mb-4">Sobre Mim</h2>
+      <p>Profissional de Tecnologia da Informação com mais de 18 anos de experiência em Infraestrutura, Redes, Cloud Computing e Suporte Técnico. Especialista em Azure.</p>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" class="max-w-4xl w-full mb-16 animate-fadeUp delay-200">
+      <h2 class="text-3xl font-semibold mb-8">Projetos</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white/10 rounded-xl p-6 hover:bg-white/20 transition transform hover:-translate-y-2">🚀 Projeto 1</div>
+        <div class="bg-white/10 rounded-xl p-6 hover:bg-white/20 transition transform hover:-translate-y-2">💻 Projeto 2</div>
+        <div class="bg-white/10 rounded-xl p-6 hover:bg-white/20 transition transform hover:-translate-y-2">📊 Projeto 3</div>
+      </div>
+    </section>
+
+    <!-- Quiz de TI -->
+    <section id="quiz-section" class="max-w-4xl w-full mb-16 bg-gray-800 bg-opacity-90 rounded-xl p-8 mx-auto animate-fadeUp">
+      <h2 class="text-3xl font-semibold mb-6 text-cyan-400">Quiz Interativo de TI</h2>
 
       <!-- Barra de progresso -->
       <div class="w-full h-4 bg-gray-700 rounded-full mb-6">
         <div id="progress" class="h-4 bg-cyan-500 rounded-full w-0 transition-all"></div>
       </div>
 
-      <!-- Pergunta -->
+      <!-- Pergunta e opções -->
       <div id="quiz" class="space-y-4 text-left">
         <div id="question" class="text-xl font-semibold"></div>
         <div id="options" class="space-y-2"></div>
@@ -44,38 +72,23 @@
           Reiniciar Quiz
         </button>
       </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-6 text-gray-300 text-sm animate-fadeIn">
+      © 2025 - Daniela Leão da Silva
+    </footer>
 
   </div>
 
   <!-- Script do Quiz -->
   <script>
     const quizData = [
-      {
-        question: "Qual protocolo é usado para enviar e-mails?",
-        options: ["FTP", "SMTP", "HTTP"],
-        answer: "SMTP"
-      },
-      {
-        question: "Qual comando do Linux mostra o diretório atual?",
-        options: ["pwd", "ls", "cd"],
-        answer: "pwd"
-      },
-      {
-        question: "Na Azure, qual serviço hospeda VMs?",
-        options: ["Azure Functions", "Azure Virtual Machines", "Azure Blob Storage"],
-        answer: "Azure Virtual Machines"
-      },
-      {
-        question: "Qual camada do modelo OSI é responsável pelo roteamento?",
-        options: ["Aplicação", "Rede", "Transporte"],
-        answer: "Rede"
-      },
-      {
-        question: "Qual comando do Windows exibe a configuração de IP?",
-        options: ["ipconfig", "ping", "netstat"],
-        answer: "ipconfig"
-      }
+      { question: "Qual protocolo é usado para enviar e-mails?", options: ["FTP","SMTP","HTTP"], answer: "SMTP" },
+      { question: "Qual comando do Linux mostra o diretório atual?", options: ["pwd","ls","cd"], answer: "pwd" },
+      { question: "Na Azure, qual serviço hospeda VMs?", options: ["Azure Functions","Azure Virtual Machines","Azure Blob Storage"], answer: "Azure Virtual Machines" },
+      { question: "Qual camada do modelo OSI é responsável pelo roteamento?", options: ["Aplicação","Rede","Transporte"], answer: "Rede" },
+      { question: "Qual comando do Windows exibe a configuração de IP?", options: ["ipconfig","ping","netstat"], answer: "ipconfig" }
     ];
 
     let currentQuestion = 0;
