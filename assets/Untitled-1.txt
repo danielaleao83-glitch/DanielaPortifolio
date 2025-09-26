@@ -1,3 +1,6 @@
 assets/
-│── fundo.jpg
-│── Curriculo-Daniela-Profissional.pdf
+│
+├─ Curriculo-Daniela-Profissional.pdf
+├─ fundo.jpg
+├─ quiz-thumbnail.jpg   ← imagem do Projeto Quiz
+└─ (opcional) outros arquivos futuros
