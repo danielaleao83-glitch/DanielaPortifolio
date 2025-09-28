@@ -1,2 +1,0 @@
-# DanielaPortifolio
-Portifolio de TI
