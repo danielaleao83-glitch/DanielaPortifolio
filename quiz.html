@@ -1,138 +1,213 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz - Daniela Leão</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      background: url("assets/fundo.jpg") no-repeat center center fixed;
-      background-size: cover;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    .quiz-container {
-      background: rgba(0,0,0,0.7);
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 500px;
-      margin: 50px auto;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    }
-
-    button, .btn {
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #007bff;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
-      display: inline-block;
-    }
-
-    button:hover, .btn:hover {
-      background: #0056b3;
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz TI Interativo com Som</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color: #fff;
+}
+.quiz-container {
+    background: rgba(0,0,0,0.85);
+    padding: 30px;
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+    position: relative;
+}
+#question {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+.option {
+    background: #eee;
+    color: #000;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.option:hover { background: #d4f0ff; transform: scale(1.02); }
+.option.correct { background: #0f0 !important; color: #000; }
+.option.wrong { background: #f00 !important; color: #fff; }
+.footer { margin-top: 15px; font-weight: bold; }
+.progress-bar {
+    width: 100%;
+    background: #444;
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 15px;
+    overflow: hidden;
+}
+.progress { height: 100%; background: #ffeb3b; width: 100%; transition: width 1s linear; }
+.btn-container { margin-top: 15px; display: flex; justify-content: space-between; }
+.btn {
+    padding: 8px 15px;
+    background: #ffeb3b;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background 0.3s;
+}
+.btn:hover { background: #ffd700; }
+#score { display: none; text-align: left; }
+.correct-text { color: #0f0; font-weight: bold; }
+.wrong-text { color: #f00; font-weight: bold; }
+</style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Quiz de TI</h1>
-    <p id="question">Carregando pergunta...</p>
-    <div id="answers"></div>
-    <p id="result"></p>
-    <button id="nextBtn" onclick="nextQuestion()">Próxima</button>
-    <button id="restartBtn" onclick="restartQuiz()" style="display:none;">🔄 Reiniciar Quiz</button>
-    <br><br>
-    <a href="index.html" class="btn">⬅ Voltar ao Portfólio</a>
-  </div>
 
-  <script>
-    const questions = [
-      {
-        question: "Qual dessas opções é um serviço de Cloud?",
-        answers: ["Azure", "Photoshop", "Excel"],
-        correct: 0
-      },
-      {
-        question: "O que significa TI?",
-        answers: ["Tecnologia da Informação", "Transporte Inteligente", "Tempo Instável"],
-        correct: 0
-      },
-      {
-        question: "Qual protocolo é usado para sites seguros (com cadeado)?",
-        answers: ["HTTP", "FTP", "HTTPS"],
-        correct: 2
-      }
-    ];
+<div class="quiz-container">
+<h2 id="question">Pergunta aparecerá aqui</h2>
+<div id="quiz-container"></div>
+<div class="footer">
+    <span id="timer">15</span> segundos restantes
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+</div>
+<div class="btn-container">
+    <button id="prevBtn" class="btn">Voltar</button>
+    <button id="nextBtn" class="btn">Próxima</button>
+</div>
+<div id="score"><h2>Pontuação Final:</h2><div id="details"></div></div>
 
-    let currentQuestion = 0;
-    let score = 0;
+<!-- Sons -->
+<audio id="correctSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="wrongSound" src="https://actions.google.com/sounds/v1/cartoon/boing.ogg"></audio>
 
-    function loadQuestion() {
-      document.getElementById("result").textContent = "";
-      const q = questions[currentQuestion];
-      document.getElementById("question").textContent = q.question;
-      const answersDiv = document.getElementById("answers");
-      answersDiv.innerHTML = "";
-      q.answers.forEach((answer, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = answer;
-        btn.onclick = () => checkAnswer(i);
-        answersDiv.appendChild(btn);
-      });
+</div>
+
+<script>
+const quizContainer = document.getElementById('quiz-container');
+const questionEl = document.getElementById('question');
+const timerEl = document.getElementById('timer');
+const progressEl = document.getElementById('progress');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const scoreContainer = document.getElementById('score');
+const detailsEl = document.getElementById('details');
+const correctSound = document.getElementById('correctSound');
+const wrongSound = document.getElementById('wrongSound');
+
+const quizData = [
+    {question:"Qual a capital do Brasil?",options:["Rio","São Paulo","Brasília","Salvador"],answer:"Brasília"},
+    {question:"Qual linguagem é usada no navegador?",options:["Python","JavaScript","C#","Java"],answer:"JavaScript"},
+    {question:"Qual protocolo de internet é mais usado?",options:["FTP","HTTP","SMTP","SSH"],answer:"HTTP"},
+    {question:"Sistema operacional da Microsoft?",options:["Linux","Windows","macOS","Android"],answer:"Windows"},
+    {question:"O que significa CPU?",options:["Central Process Unit","Central Processing Unit","Computer Personal Unit","Computer Processing Unit"],answer:"Central Processing Unit"},
+    {question:"Qual porta padrão do HTTP?",options:["80","443","21","25"],answer:"80"},
+    {question:"O que é Cloud Computing?",options:["Computação em nuvem","Computador físico","Rede local","Banco de dados"],answer:"Computação em nuvem"},
+    {question:"Banco de dados relacional?",options:["MongoDB","MySQL","Redis","Cassandra"],answer:"MySQL"},
+    {question:"Linguagem para Android nativo?",options:["Java","C#","Python","Swift"],answer:"Java"},
+    {question:"O que é DNS?",options:["Servidor de nomes","Banco de dados","Processador","Rede local"],answer:"Servidor de nomes"}
+];
+
+let currentQuestion=0;
+let timeLeft=15;
+let timer;
+let userAnswers=new Array(quizData.length).fill(null);
+let answered=false;
+
+function showQuestion(){
+    const q=quizData[currentQuestion];
+    questionEl.textContent=q.question;
+    quizContainer.innerHTML="";
+    q.options.forEach(opt=>{
+        const div=document.createElement('div');
+        div.classList.add('option');
+        div.textContent=opt;
+        if(userAnswers[currentQuestion]===opt) div.classList.add('selected');
+        div.addEventListener('click',()=>selectOption(div,opt));
+        quizContainer.appendChild(div);
+    });
+    timeLeft=15;
+    timerEl.textContent=timeLeft;
+    progressEl.style.width='100%';
+    clearInterval(timer);
+    answered=false;
+    timer=setInterval(updateTimer,1000);
+    prevBtn.style.display=currentQuestion===0?'none':'inline-block';
+    nextBtn.textContent=currentQuestion===quizData.length-1?'Finalizar':'Próxima';
+}
+
+function selectOption(div,opt){
+    if(answered) return;
+    quizContainer.querySelectorAll('.option').forEach(d=>d.classList.remove('selected','correct','wrong'));
+    div.classList.add('selected');
+    const correct=quizData[currentQuestion].answer;
+    if(opt===correct){
+        div.classList.add('correct');
+        correctSound.play();
+    } else {
+        div.classList.add('wrong');
+        wrongSound.play();
     }
+    userAnswers[currentQuestion]=opt;
+    answered=true;
+    clearInterval(timer);
+    setTimeout(()=>{nextQuestion()},1000); // avança automaticamente
+}
 
-    function checkAnswer(choice) {
-      const q = questions[currentQuestion];
-      if (choice === q.correct) {
-        score++;
-        document.getElementById("result").textContent = "✅ Correto!";
-      } else {
-        document.getElementById("result").textContent = "❌ Errado!";
-      }
+function updateTimer(){
+    timeLeft--;
+    timerEl.textContent=timeLeft;
+    progressEl.style.width=(timeLeft/15*100)+'%';
+    if(timeLeft<=0){
+        clearInterval(timer);
+        answered=true;
+        nextQuestion();
     }
+}
 
-    function nextQuestion() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        loadQuestion();
-      } else {
-        document.getElementById("question").textContent = "Fim do Quiz!";
-        document.getElementById("answers").innerHTML = "";
-        document.getElementById("result").textContent = `Você acertou ${score} de ${questions.length} perguntas.`;
+function nextQuestion(){
+    if(currentQuestion<quizData.length-1){
+        currentQuestion++;
+        showQuestion();
+    } else finishQuiz();
+}
 
-        // esconder botão próxima e mostrar botão reiniciar
-        document.getElementById("nextBtn").style.display = "none";
-        document.getElementById("restartBtn").style.display = "inline-block";
-      }
+function prevQuestion(){
+    if(currentQuestion>0){
+        currentQuestion--;
+        showQuestion();
     }
+}
 
-    function restartQuiz() {
-      currentQuestion = 0;
-      score = 0;
-      document.getElementById("nextBtn").style.display = "inline-block";
-      document.getElementById("restartBtn").style.display = "none";
-      loadQuestion();
-    }
+function finishQuiz(){
+    clearInterval(timer);
+    let score=0;
+    detailsEl.innerHTML="";
+    quizData.forEach((q,i)=>{
+        const userAns=userAnswers[i];
+        const correct=q.answer;
+        const div=document.createElement('div');
+        div.innerHTML=`${i+1}. ${q.question}<br>
+        Sua resposta: <span class="${userAns===correct?'correct-text':'wrong-text'}">${userAns||'Não respondeu'}</span> | Resposta correta: <span class="correct-text">${correct}</span><br><br>`;
+        detailsEl.appendChild(div);
+        if(userAns===correct) score++;
+    });
+    quizContainer.style.display='none';
+    questionEl.style.display='none';
+    document.querySelector('.footer').style.display='none';
+    document.querySelector('.btn-container').style.display='none';
+    scoreContainer.style.display='block';
+    detailsEl.insertAdjacentHTML('afterbegin',`<h3>Sua pontuação: ${score} / ${quizData.length}</h3>`);
+}
 
-    // Carrega a primeira pergunta
-    loadQuestion();
-  </script>
+prevBtn.addEventListener('click',prevQuestion);
+nextBtn.addEventListener('click',nextQuestion);
+
+showQuestion();
+</script>
 </body>
 </html>

@@ -1,13 +1,17 @@
-// Efeito de animação ao rolar a página
-const elements = document.querySelectorAll('.animate-fadeUp');
+const quizContainer = document.getElementById('quiz-container');
 
-window.addEventListener('scroll', () => {
-  const triggerBottom = window.innerHeight * 0.9;
+quizContainer.addEventListener('click', function(e) {
+    // Verifica se clicou em uma opção
+    if(e.target.classList.contains('option')) {
+        const selected = e.target.dataset.value;
+        console.log('Selecionou:', selected);
 
-  elements.forEach(el => {
-    const elTop = el.getBoundingClientRect().top;
-    if (elTop < triggerBottom) {
-      el.classList.add('animate-fadeUp');
+        // Destaca a opção selecionada
+        quizContainer.querySelectorAll('.option').forEach(opt => {
+            opt.style.backgroundColor = ''; // reseta cores
+        });
+        e.target.style.backgroundColor = '#a0e7a0'; // cor de seleção
+
+        // Aqui você pode adicionar lógica de pontuação ou próxima pergunta
     }
-  });
 });

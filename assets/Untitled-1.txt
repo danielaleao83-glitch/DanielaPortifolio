@@ -1,6 +1,10 @@
-assets/
+DanielaPortifolio/
+│   index.html
+│   quiz.html
+│   style.css
 │
-├─ Curriculo-Daniela-Profissional.pdf
-├─ fundo.jpg
-├─ quiz-thumbnail.jpg   ← imagem do Projeto Quiz
-└─ (opcional) outros arquivos futuros
+└───assets/
+    │   fundo.jpg
+    │   projeto1.jpg
+    │   Curriculo-Daniela-Profissional.pdf
+
