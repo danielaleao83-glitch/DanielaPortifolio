@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -95,6 +96,20 @@
             color: white;
         }
 
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #1f2937;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #374151;
+        }
+
         @media (max-width: 800px) {
             .container {
                 flex-direction: column;
@@ -143,9 +158,9 @@
     <div class="project-card">
         <img src="assets/projeto2.jpg" alt="Projeto 2">
         <div class="project-info">
-            <h3>Portfólio Pessoal</h3>
-            <p>Portfólio online para mostrar meus projetos, skills e experiência profissional.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto2" target="_blank">Veja no GitHub</a>
+            <h3>Quiz Tecnológico</h3>
+            <p>Um quiz interativo com perguntas sobre celular e computadores. 20 perguntas, 30 segundos cada, com animações e feedback visual.</p>
+            <button onclick="iniciarQuiz()">Jogar Agora</button>
         </div>
     </div>
 
@@ -160,9 +175,119 @@
 
 </div>
 
+<!-- Projeto 2 - Quiz Tecnológico -->
+<div id="quiz-container" style="display:none; padding:20px; background:#fff; border-radius:10px; margin:20px;">
+    <h2>Quiz Tecnológico</h2>
+    <p id="pergunta"></p>
+    <div id="opcoes"></div>
+    <p id="timer"></p>
+    <div id="resultado" style="display:none;">
+        <h3>Sua pontuação: <span id="pontuacao"></span>/20</h3>
+        <button onclick="refazerQuiz()">Refazer Quiz</button>
+    </div>
+</div>
+
 <footer>
     <p>📫 Contato: daniela.leao83@gmail.com | <a href="https://www.linkedin.com/in/danielaleao83" style="color:white;">LinkedIn</a> | <a href="https://github.com/danielaleao83" style="color:white;">GitHub</a></p>
 </footer>
 
+<script>
+const perguntas = [
+  { q: "Qual sistema operacional é usado nos iPhones?", op: ["Android", "iOS", "Windows Phone"], correta: 1 },
+  { q: "O que significa CPU?", op: ["Central Process Unit", "Central Processing Unit", "Computer Personal Unit"], correta: 1 },
+  { q: "Qual empresa desenvolveu o sistema Android?", op: ["Microsoft", "Apple", "Google"], correta: 2 },
+  { q: "O que é SSD?", op: ["Solid State Drive", "Secure Software Data", "Super Speed Disk"], correta: 0 },
+  { q: "O que significa RAM?", op: ["Read Access Memory", "Random Access Memory", "Rapid Access Module"], correta: 1 },
+  { q: "Qual desses é um navegador?", op: ["Excel", "Chrome", "Word"], correta: 1 },
+  { q: "O que significa URL?", op: ["Uniform Resource Locator", "Universal Remote Link", "User Reference Line"], correta: 0 },
+  { q: "Qual porta USB é mais rápida?", op: ["USB 2.0", "USB 3.0", "USB 1.0"], correta: 1 },
+  { q: "O que é GPU?", op: ["Graphical Processing Unit", "General Processing Unit", "Global Power Utility"], correta: 0 },
+  { q: "Qual linguagem é usada para páginas web?", op: ["HTML", "Python", "C++"], correta: 0 },
+  { q: "O que é phishing?", op: ["Ataque por e-mail falso", "Atualização de software", "Tipo de antivírus"], correta: 0 },
+  { q: "Qual destes é um sistema operacional?", op: ["Linux", "Photoshop", "Google"], correta: 0 },
+  { q: "O que significa IP?", op: ["Internet Protocol", "Internal Process", "Information Provider"], correta: 0 },
+  { q: "Qual empresa criou o Windows?", op: ["Apple", "Microsoft", "IBM"], correta: 1 },
+  { q: "O que é Bluetooth?", op: ["Rede cabeada", "Tecnologia sem fio", "Sistema operacional"], correta: 1 },
+  { q: "Qual destes é um antivírus?", op: ["Windows Defender", "Chrome", "Excel"], correta: 0 },
+  { q: "O que significa PDF?", op: ["Portable Document Format", "Personal Data File", "Printed Document Form"], correta: 0 },
+  { q: "O que é firewall?", op: ["Proteção de rede", "Processador", "Aplicativo de vídeo"], correta: 0 },
+  { q: "Qual dispositivo é usado para entrada de dados?", op: ["Monitor", "Teclado", "Impressora"], correta: 1 },
+  { q: "O que significa BIOS?", op: ["Basic Input Output System", "Binary Information Operating Setup", "Basic Internal Operating Software"], correta: 0 }
+];
+
+let indice = 0;
+let pontuacao = 0;
+let tempo = 30;
+let cronometro;
+
+function iniciarQuiz() {
+  document.getElementById("quiz-container").style.display = "block";
+  document.getElementById("resultado").style.display = "none";
+  indice = 0;
+  pontuacao = 0;
+  mostrarPergunta();
+}
+
+function mostrarPergunta() {
+  if (indice >= perguntas.length) {
+    return mostrarResultado();
+  }
+  const perguntaAtual = perguntas[indice];
+  document.getElementById("pergunta").innerText = perguntaAtual.q;
+  const opcoesDiv = document.getElementById("opcoes");
+  opcoesDiv.innerHTML = "";
+  perguntaAtual.op.forEach((opcao, i) => {
+    const botao = document.createElement("button");
+    botao.innerText = opcao;
+    botao.style.display = "block";
+    botao.style.margin = "10px 0";
+    botao.onclick = () => verificarResposta(i, botao);
+    opcoesDiv.appendChild(botao);
+  });
+  tempo = 30;
+  document.getElementById("timer").innerText = "⏳ Tempo: " + tempo + "s";
+  clearInterval(cronometro);
+  cronometro = setInterval(() => {
+    tempo--;
+    document.getElementById("timer").innerText = "⏳ Tempo: " + tempo + "s";
+    if (tempo <= 0) {
+      clearInterval(cronometro);
+      indice++;
+      mostrarPergunta();
+    }
+  }, 1000);
+}
+
+function verificarResposta(opcao, botao) {
+  clearInterval(cronometro);
+  const perguntaAtual = perguntas[indice];
+  if (opcao === perguntaAtual.correta) {
+    botao.style.backgroundColor = "green";
+    botao.style.color = "white";
+    pontuacao++;
+  } else {
+    botao.style.backgroundColor = "red";
+    botao.style.color = "white";
+  }
+  setTimeout(() => {
+    indice++;
+    mostrarPergunta();
+  }, 1000);
+}
+
+function mostrarResultado() {
+  document.getElementById("quiz-container").innerHTML = `
+    <h2>Fim do Quiz!</h2>
+    <p>Sua pontuação: ${pontuacao} / ${perguntas.length}</p>
+    <button onclick="iniciarQuiz()">Refazer Quiz</button>
+  `;
+}
+
+function refazerQuiz() {
+  iniciarQuiz();
+}
+</script>
+
 </body>
 </html>
+```

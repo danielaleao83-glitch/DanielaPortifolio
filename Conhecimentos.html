@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Celular e PC</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f0f0f0; text-align: center; margin:0; padding:0; }
+.quiz-container { background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 800px; margin: 50px auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+h2 { color: #1f2937; }
+#question-image { max-width: 100%; height: auto; margin-top: 15px; border-radius: 10px; }
+.options { display: flex; flex-direction: column; margin-top: 20px; }
+.options button { margin: 10px 0; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+#timer { font-weight: bold; font-size: 20px; margin-bottom: 20px; }
+#score-container { display: none; margin-top: 20px; }
+#score-container button { padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; background-color: #1f2937; color: white; }
+.correct { background-color: green !important; color: white; }
+.wrong { background-color: red !important; color: white; }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2 id="question">Pergunta será exibida aqui</h2>
+    <img id="question-image" src="" alt="Imagem da pergunta">
+    <div id="timer">Tempo restante: 30s</div>
+    <div class="options">
+        <button id="option0">Opção 1</button>
+        <button id="option1">Opção 2</button>
+        <button id="option2">Opção 3</button>
+    </div>
+    <div id="score-container">
+        <h2>Sua pontuação: <span id="score"></span>/20</h2>
+        <button onclick="restartQuiz()">Refazer Quiz</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { question: "Qual empresa fabrica o iPhone?", options: ["Apple", "Samsung", "Xiaomi"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/f/fa/IPhone_13_Pro_Blue_Perspective.png" },
+    { question: "Qual sistema operacional roda em smartphones Samsung?", options: ["Android", "iOS", "Windows"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Android_logo_2019.png" },
+    { question: "O que significa CPU?", options: ["Central Processing Unit", "Computer Power Unit", "Control Program User"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/1/10/Intel_Core_i7_CPU.jpg" },
+    { question: "Qual é a função do SSD em computadores?", options: ["Armazenamento rápido", "Processamento de dados", "Fonte de energia"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/SSD_2.5in_1.jpg" },
+    { question: "Qual empresa fabrica processadores Ryzen?", options: ["Intel", "AMD", "Nvidia"], correct: 1, img: "https://upload.wikimedia.org/wikipedia/commons/5/55/AMD_Ryzen_5_1600_CPU.jpg" },
+    { question: "Qual memória RAM é recomendada para jogos atuais?", options: ["4GB", "8GB", "16GB"], correct: 2, img: "https://upload.wikimedia.org/wikipedia/commons/2/23/DDR4_RAM.jpg" },
+    { question: "Qual é o sistema operacional do MacBook?", options: ["Windows", "Linux", "macOS"], correct: 2, img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/MacOS_Big_Sur_Wallpaper.jpg" },
+    { question: "Qual tecnologia permite conexão sem fio de curto alcance?", options: ["Bluetooth", "Ethernet", "HDMI"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Bluetooth.svg" },
+    { question: "Qual é a função da GPU?", options: ["Processamento gráfico", "Armazenamento", "Conexão à internet"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/6/65/GeForce_GTX_1080_Ti.jpg" },
+    { question: "O Android é baseado em qual sistema?", options: ["Linux", "Windows", "macOS"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Android_logo_2019.png" },
+    { question: "Qual empresa fabrica os smartphones Pixel?", options: ["Google", "Samsung", "Apple"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Google_Pixel_6.png" },
+    { question: "Qual cabo é usado para carregar e transferir dados?", options: ["HDMI", "USB", "Ethernet"], correct: 1, img: "https://upload.wikimedia.org/wikipedia/commons/3/35/USB_2.0_Plug.jpg" },
+    { question: "O que é Overclock em computadores?", options: ["Aumentar a velocidade do processador", "Trocar o sistema operacional", "Atualizar o antivírus"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Overclocking.JPG" },
+    { question: "Qual é a função do BIOS?", options: ["Inicializar o computador", "Editar fotos", "Gerenciar rede social"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/f/f7/BIOS_screenshot.png" },
+    { question: "Qual marca fabrica o processador Core i7?", options: ["Intel", "AMD", "Apple"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/1/15/Intel_Core_i7_logo.png" },
+    { question: "O que significa HTML?", options: ["HyperText Markup Language", "High Tech Machine Learning", "Hyper Terminal Module Language"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" },
+    { question: "Qual armazenamento é mais rápido?", options: ["HDD", "SSD", "CD-ROM"], correct: 1, img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/SSD_2.5in_1.jpg" },
+    { question: "Qual empresa criou o Windows?", options: ["Microsoft", "Apple", "IBM"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.png" },
+    { question: "O que significa GPU?", options: ["Graphics Processing Unit", "Global Power Unit", "General Performance Utility"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/6/65/GeForce_GTX_1080_Ti.jpg" },
+    { question: "Qual é a função do sistema operacional?", options: ["Gerenciar hardware e software", "Criar aplicativos", "Acessar internet"], correct: 0, img: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Linux_logo.png" }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let timer;
+let timeLeft = 30;
+
+function showQuestion() {
+    if(currentQuestion >= questions.length){
+        document.querySelector('.options').style.display = 'none';
+        document.getElementById('timer').style.display = 'none';
+        document.getElementById('question-image').style.display = 'none';
+        document.getElementById('score-container').style.display = 'block';
+        document.getElementById('score').textContent = score;
+        return;
+    }
+
+    const q = questions[currentQuestion];
+    document.getElementById('question').textContent = q.question;
+    document.getElementById('question-image').src = q.img;
+    document.getElementById('question-image').style.display = 'block';
+    
+    q.options.forEach((opt, i) => {
+        const btn = document.getElementById('option' + i);
+        btn.textContent = opt;
+        btn.className = '';
+        btn.disabled = false;
+    });
+
+    timeLeft = 30;
+    document.getElementById('timer').textContent =
