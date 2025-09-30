@@ -1,293 +1,179 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniela Leão - Portfólio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniela Leão - Portfólio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #d0e7ff; /* fundo azul claro */
+        color: #1f2937;
+    }
 
-        header {
-            background-color: #1f2937;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+    header {
+        background-color: #0d3b66; /* azul escuro */
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+    }
 
-        header p {
-            margin: 5px 0 0 0;
-        }
+    header p {
+        margin: 5px 0 0 0;
+        font-size: 1.2em;
+    }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-            gap: 20px;
-        }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 20px;
+        justify-content: center;
+    }
 
-        .about, .stats {
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+    .about {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        max-width: 600px;
+        text-align: center;
+    }
 
-        .about {
-            flex: 1 1 300px;
-        }
+    h2 {
+        color: #0d3b66;
+    }
 
-        .stats {
-            flex: 1 1 300px;
-        }
+    .projects {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
 
-        h2 {
-            color: #1f2937;
-        }
+    .project-card {
+        background-color: #f6f6f6;
+        border-radius: 15px;
+        overflow: hidden;
+        width: 300px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
 
-        img {
-            max-width: 100%;
-            margin-top: 10px;
-        }
+    .project-card:hover {
+        transform: translateY(-5px);
+    }
 
-        .projects {
-            padding: 20px;
-        }
+    .project-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
 
-        .project-card {
-            display: flex;
-            flex-wrap: wrap;
-            background-color: white;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+    .project-info {
+        padding: 15px;
+    }
 
-        .project-card img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-        }
+    .project-info h3 {
+        margin-top: 0;
+        color: #0d3b66;
+    }
 
-        .project-info {
-            padding: 20px;
-            flex: 1;
-        }
+    .project-info a {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #0077b6;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
 
-        .project-info h3 {
-            margin-top: 0;
-        }
+    .project-info a:hover {
+        background-color: #023e8a;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1f2937;
-            color: white;
-        }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #0d3b66;
+        color: white;
+    }
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            background-color: #1f2937;
-            color: white;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    footer a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.2em;
+        text-decoration: none;
+    }
 
-        button:hover {
-            background-color: #374151;
+    @media (max-width: 800px) {
+        .container, .projects {
+            flex-direction: column;
+            align-items: center;
         }
-
-        @media (max-width: 800px) {
-            .container {
-                flex-direction: column;
-            }
-            .project-card {
-                flex-direction: column;
-            }
-            .project-card img {
-                width: 100%;
-                height: auto;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
 
 <header>
-    <h1>Daniela Leão</h1>
-    <p>Profissional de TI | Infraestrutura | Azure | Cloud Computing</p>
+    <h1>Daniela Leão da Silva</h1>
+    <p>Profissional a mais de 10 anos de experiencia em TI | Analise de sistemas | Rede de Computadores | Manutenção e Hadware e Software | Docente em Tecnologia da Informação | Ifraestrutura | Zabbix | Conhecimento Intermediario em Azure Cloud Computing )   </p>
 </header>
 
 <div class="container">
     <div class="about">
         <h2>Sobre Mim</h2>
-        <p>Olá! Eu sou Daniela, especialista em Analise de Sistemas e Graduada em Rede de Computadores, estatísticas do GitHub e formas de contato.</p>
-    </div>
-    <div class="stats">
-        <h2>Estatísticas do GitHub</h2>
-        <img src="https://github-readme-stats.vercel.app/api?username=danielaleao83&show_icons=true&theme=radical" alt="GitHub Stats">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=danielaleao83&layout=compact&theme=radical" alt="Top Langs">
+        <p>Olá! Eu sou Daniela, especialista em Análise de Sistemas e Graduada em Redes de Computadores. Aqui você encontra meus projetos e formas de contato.</p>
     </div>
 </div>
 
 <div class="projects">
-    <h2>Projetos</h2>
-
-    <div class="project-card">
+    <div class="project-card" style="background-color: #ffe066;">
         <img src="assets/projeto1.jpg" alt="Projeto 1">
         <div class="project-info">
             <h3>Projeto Quiz Interativo</h3>
-            <p>Um quiz interativo em Python que permite aos usuários testar seus conhecimentos.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto1" target="_blank">Veja no GitHub</a>
+            <p>Um quiz interativo em Python para testar conhecimentos.</p>
+            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto1" target="_blank"><i class="fab fa-github"></i> Veja no GitHub</a>
         </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" style="background-color: #ff6b6b;">
         <img src="assets/projeto2.jpg" alt="Projeto 2">
         <div class="project-info">
             <h3>Quiz Tecnológico</h3>
-            <p>Um quiz interativo com perguntas sobre celular e computadores. 20 perguntas, 30 segundos cada, com animações e feedback visual.</p>
-            <button onclick="iniciarQuiz()">Jogar Agora</button>
+            <p>Quiz interativo sobre celulares e computadores. 20 perguntas, 30 segundos cada.</p>
+            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto2" target="_blank"><i class="fab fa-github"></i> Jogar Agora</a>
         </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card" style="background-color: #4ecdc4;">
         <img src="assets/projeto3.jpg" alt="Projeto 3">
         <div class="project-info">
             <h3>Outro Projeto</h3>
             <p>Breve descrição do projeto.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto3" target="_blank">Veja no GitHub</a>
+            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto3" target="_blank"><i class="fab fa-github"></i> Veja no GitHub</a>
         </div>
-    </div>
-
-</div>
-
-<!-- Projeto 2 - Quiz Tecnológico -->
-<div id="quiz-container" style="display:none; padding:20px; background:#fff; border-radius:10px; margin:20px;">
-    <h2>Quiz Tecnológico</h2>
-    <p id="pergunta"></p>
-    <div id="opcoes"></div>
-    <p id="timer"></p>
-    <div id="resultado" style="display:none;">
-        <h3>Sua pontuação: <span id="pontuacao"></span>/20</h3>
-        <button onclick="refazerQuiz()">Refazer Quiz</button>
     </div>
 </div>
 
 <footer>
-    <p>📫 Contato: daniela.leao83@gmail.com | <a href="https://www.linkedin.com/in/danielaleao83" style="color:white;">LinkedIn</a> | <a href="https://github.com/danielaleao83" style="color:white;">GitHub</a></p>
+    <p>📫 Contato: daniela.leao83@gmail.com | 
+        <a href="https://www.linkedin.com/in/danielaleao83"><i class="fab fa-linkedin"></i></a> 
+        <a href="https://github.com/danielaleao83"><i class="fab fa-github"></i></a>
+    </p>
 </footer>
-
-<script>
-const perguntas = [
-  { q: "Qual sistema operacional é usado nos iPhones?", op: ["Android", "iOS", "Windows Phone"], correta: 1 },
-  { q: "O que significa CPU?", op: ["Central Process Unit", "Central Processing Unit", "Computer Personal Unit"], correta: 1 },
-  { q: "Qual empresa desenvolveu o sistema Android?", op: ["Microsoft", "Apple", "Google"], correta: 2 },
-  { q: "O que é SSD?", op: ["Solid State Drive", "Secure Software Data", "Super Speed Disk"], correta: 0 },
-  { q: "O que significa RAM?", op: ["Read Access Memory", "Random Access Memory", "Rapid Access Module"], correta: 1 },
-  { q: "Qual desses é um navegador?", op: ["Excel", "Chrome", "Word"], correta: 1 },
-  { q: "O que significa URL?", op: ["Uniform Resource Locator", "Universal Remote Link", "User Reference Line"], correta: 0 },
-  { q: "Qual porta USB é mais rápida?", op: ["USB 2.0", "USB 3.0", "USB 1.0"], correta: 1 },
-  { q: "O que é GPU?", op: ["Graphical Processing Unit", "General Processing Unit", "Global Power Utility"], correta: 0 },
-  { q: "Qual linguagem é usada para páginas web?", op: ["HTML", "Python", "C++"], correta: 0 },
-  { q: "O que é phishing?", op: ["Ataque por e-mail falso", "Atualização de software", "Tipo de antivírus"], correta: 0 },
-  { q: "Qual destes é um sistema operacional?", op: ["Linux", "Photoshop", "Google"], correta: 0 },
-  { q: "O que significa IP?", op: ["Internet Protocol", "Internal Process", "Information Provider"], correta: 0 },
-  { q: "Qual empresa criou o Windows?", op: ["Apple", "Microsoft", "IBM"], correta: 1 },
-  { q: "O que é Bluetooth?", op: ["Rede cabeada", "Tecnologia sem fio", "Sistema operacional"], correta: 1 },
-  { q: "Qual destes é um antivírus?", op: ["Windows Defender", "Chrome", "Excel"], correta: 0 },
-  { q: "O que significa PDF?", op: ["Portable Document Format", "Personal Data File", "Printed Document Form"], correta: 0 },
-  { q: "O que é firewall?", op: ["Proteção de rede", "Processador", "Aplicativo de vídeo"], correta: 0 },
-  { q: "Qual dispositivo é usado para entrada de dados?", op: ["Monitor", "Teclado", "Impressora"], correta: 1 },
-  { q: "O que significa BIOS?", op: ["Basic Input Output System", "Binary Information Operating Setup", "Basic Internal Operating Software"], correta: 0 }
-];
-
-let indice = 0;
-let pontuacao = 0;
-let tempo = 30;
-let cronometro;
-
-function iniciarQuiz() {
-  document.getElementById("quiz-container").style.display = "block";
-  document.getElementById("resultado").style.display = "none";
-  indice = 0;
-  pontuacao = 0;
-  mostrarPergunta();
-}
-
-function mostrarPergunta() {
-  if (indice >= perguntas.length) {
-    return mostrarResultado();
-  }
-  const perguntaAtual = perguntas[indice];
-  document.getElementById("pergunta").innerText = perguntaAtual.q;
-  const opcoesDiv = document.getElementById("opcoes");
-  opcoesDiv.innerHTML = "";
-  perguntaAtual.op.forEach((opcao, i) => {
-    const botao = document.createElement("button");
-    botao.innerText = opcao;
-    botao.style.display = "block";
-    botao.style.margin = "10px 0";
-    botao.onclick = () => verificarResposta(i, botao);
-    opcoesDiv.appendChild(botao);
-  });
-  tempo = 30;
-  document.getElementById("timer").innerText = "⏳ Tempo: " + tempo + "s";
-  clearInterval(cronometro);
-  cronometro = setInterval(() => {
-    tempo--;
-    document.getElementById("timer").innerText = "⏳ Tempo: " + tempo + "s";
-    if (tempo <= 0) {
-      clearInterval(cronometro);
-      indice++;
-      mostrarPergunta();
-    }
-  }, 1000);
-}
-
-function verificarResposta(opcao, botao) {
-  clearInterval(cronometro);
-  const perguntaAtual = perguntas[indice];
-  if (opcao === perguntaAtual.correta) {
-    botao.style.backgroundColor = "green";
-    botao.style.color = "white";
-    pontuacao++;
-  } else {
-    botao.style.backgroundColor = "red";
-    botao.style.color = "white";
-  }
-  setTimeout(() => {
-    indice++;
-    mostrarPergunta();
-  }, 1000);
-}
-
-function mostrarResultado() {
-  document.getElementById("quiz-container").innerHTML = `
-    <h2>Fim do Quiz!</h2>
-    <p>Sua pontuação: ${pontuacao} / ${perguntas.length}</p>
-    <button onclick="iniciarQuiz()">Refazer Quiz</button>
-  `;
-}
-
-function refazerQuiz() {
-  iniciarQuiz();
-}
-</script>
 
 </body>
 </html>
-```
