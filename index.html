@@ -1,179 +1,178 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Arial Black', Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #d0e7ff; /* fundo azul claro */
-        color: #1f2937;
+        background-color: #0D1B2A; /* fundo azul escuro */
+        color: #ffffff;
+        text-align: center;
     }
 
     header {
-        background-color: #0d3b66; /* azul escuro */
-        color: white;
-        padding: 20px;
-        text-align: center;
+        background-color: #1B263B;
+        padding: 30px 20px;
     }
 
     header h1 {
         margin: 0;
         font-size: 2.5em;
+        color: #F0EDEE;
     }
 
     header p {
-        margin: 5px 0 0 0;
-        font-size: 1.2em;
+        margin: 10px 0 0;
+        color: #A3CEF1;
     }
 
     .container {
-        display: flex;
-        flex-wrap: wrap;
         padding: 20px;
-        gap: 20px;
-        justify-content: center;
     }
 
     .about {
-        background-color: #ffffff;
+        background-color: #162447;
         padding: 20px;
         border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        max-width: 600px;
-        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 30px;
     }
 
-    h2 {
-        color: #0d3b66;
+    .about p {
+        font-size: 1.1em;
+        color: #E0E1DD;
     }
 
     .projects {
-        padding: 20px;
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
+        flex-wrap: wrap; /* quebra no celular */
+        margin-bottom: 30px;
     }
 
     .project-card {
-        background-color: #f6f6f6;
+        background-color: #1F4068;
+        padding: 20px;
         border-radius: 15px;
-        overflow: hidden;
-        width: 300px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
+        width: 280px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        transition: transform 0.2s;
     }
 
     .project-card:hover {
-        transform: translateY(-5px);
+        transform: scale(1.05);
+    }
+
+    .project-card:nth-child(2) {
+        background-color: #1B1B2F;
     }
 
     .project-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .project-info {
-        padding: 15px;
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
     }
 
     .project-info h3 {
-        margin-top: 0;
-        color: #0d3b66;
+        margin: 10px 0;
+        color: #FFD700;
     }
 
-    .project-info a {
+    .project-info p {
+        color: #E0E1DD;
+    }
+
+    .btn-quiz {
         display: inline-block;
         margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00b050; /* verde profissional */
+        color: #fff;
         text-decoration: none;
-        color: white;
-        background-color: #0077b6;
-        padding: 8px 12px;
         border-radius: 8px;
-        transition: background-color 0.3s;
+        font-weight: bold;
+        transition: 0.3s;
     }
 
-    .project-info a:hover {
-        background-color: #023e8a;
+    .btn-quiz:hover {
+        background-color: #009245; /* verde mais escuro */
     }
 
     footer {
-        text-align: center;
+        background-color: #1B263B;
+        color: #fff;
         padding: 20px;
-        background-color: #0d3b66;
-        color: white;
     }
 
     footer a {
-        color: white;
-        margin: 0 10px;
-        font-size: 1.2em;
+        color: #FFD700;
         text-decoration: none;
-    }
-
-    @media (max-width: 800px) {
-        .container, .projects {
-            flex-direction: column;
-            align-items: center;
-        }
+        margin: 0 10px;
     }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Daniela Leão da Silva</h1>
-    <p>Profissional a mais de 10 anos de experiencia em TI | Analise de sistemas | Rede de Computadores | Manutenção e Hadware e Software | Docente em Tecnologia da Informação | Ifraestrutura | Zabbix | Conhecimento Intermediario em Azure Cloud Computing )   </p>
-</header>
+    <h1>Daniela Leão</h1>
+    <p>Profissional de TI a mais de 10 anos de experiência Pós graduada em Analise de Sistemas com Graduação em Rede de Computadores | Suporte Técnico em Hadwaree Software | Infraestrutura | Zabbix e SLA | Docente na Area de Tecnologia | Conhecimento intermediario em Azure | Cloud Computing | GitHub | </p>
+</header> 
 
 <div class="container">
     <div class="about">
         <h2>Sobre Mim</h2>
-        <p>Olá! Eu sou Daniela Leão, em busca sempre se novos conhecimentos e avanços tecnologios , na melhoria do meu conhecimento e inovaçoes .</p>
+        <p>Olá! Eu sou DanielaL, Profissional de TI apaixonada por tecnologia e inovação. Tenho experiência na Area de TI . Busco constantemente aprimorar meus conhecimentos e aplicar boas práticas em ambientes corporativos e Governamentais ..</p>
     </div>
-</div>
 
-<div class="projects">
-    <div class="project-card" style="background-color: #ffe066;">
-        <img src="assets/projeto1.jpg" alt="Projeto 1">
-        <div class="project-info">
-            <h3>Projeto Quiz Interativo</h3>
-            <p>Um quiz interativo em Python para testar conhecimentos.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto1" target="_blank"><i class="fab fa-github"></i> Veja no GitHub</a>
+    <h2>Projetos</h2>
+    <div class="projects">
+        <!-- Projeto 1 -->
+        <div class="project-card">
+            <img src="assets/projeto1.jpg" alt="Projeto Quiz 1">
+            <div class="project-info">
+                <h3>Projeto Quiz Interativo</h3>
+                <p>Projeto 1 .</p>
+                <a href="Projeto1/quiz.html" class="btn-quiz" target="_blank">Jogar Quiz 1</a>
+            </div>
         </div>
-    </div>
 
-    <div class="project-card" style="background-color: #ff6b6b;">
-        <img src="assets/projeto2.jpg" alt="Projeto 2">
-        <div class="project-info">
-            <h3>Quiz Tecnológico</h3>
-            <p>Quiz interativo sobre celulares e computadores. 20 perguntas, 30 segundos cada.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto2" target="_blank"><i class="fab fa-github"></i> Jogar Agora</a>
+        <!-- Projeto 2 -->
+        <div class="project-card">
+            <img src="assets/projeto2.jpg" alt="Projeto Quiz 2">
+            <div class="project-info">
+                <h3>Quiz Tecnológico</h3>
+                <p>Projeto 2.</p>
+                <a href="Projeto2/quiz2.html" class="btn-quiz" target="_blank">Jogar Quiz 2</a>
+            </div>
         </div>
-    </div>
 
-    <div class="project-card" style="background-color: #4ecdc4;">
-        <img src="assets/projeto3.jpg" alt="Projeto 3">
-        <div class="project-info">
-            <h3>Outro Projeto</h3>
-            <p>Breve descrição do projeto.</p>
-            <a href="https://github.com/danielaleao83/DanielaPortifolio/tree/main/Projeto3" target="_blank"><i class="fab fa-github"></i> Veja no GitHub</a>
+        <!-- Currículo -->
+        <div class="project-card">
+            <img src="assets/curriculo.jpg" alt="Currículo">
+            <div class="project-info">
+                <h3>Currículo Profissional</h3>
+                <p>Visualize ou baixe meu currículo atualizado.</p>
+                <a href="assets/Curriculo-Daniela-Profissional.pdf" class="btn-quiz" target="_blank">Visualizar</a>
+                <a href="assets/Curriculo-Daniela-Profissional.pdf" class="btn-quiz" download>Download</a>
+            </div>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>📫 Contato: daniela.leao83@gmail.com | 
-        <a href="https://www.linkedin.com/in/danielaleao83"><i class="fab fa-linkedin"></i></a> 
-        <a href="https://github.com/danielaleao83"><i class="fab fa-github"></i></a>
-    </p>
+    <p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> | 
+       <a href="https://www.linkedin.com/in/daniela-leão-561466a1">LinkedIn</a> | 
+       <a href="https://github.com/danielaleao83">GitHub</a></p>
 </footer>
 
 </body>
 </html>
+```
+
