@@ -5,232 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
 <style>
-    /* ====== Geral ====== */
-    body {
-        font-family: "Arial Black", Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #0a1b2e; /* azul escuro geral */
-        color: #e5e7eb;
-        overflow-x: hidden;
-    }
+body { font-family: "Arial Black", Arial, sans-serif; margin:0; padding:0; background-color:#0a1b2e; color:#e5e7eb; overflow-x:hidden; }
+a { text-decoration:none; }
+h1,h2 { text-align:center; margin:20px 0; }
 
-    a {
-        text-decoration: none;
-    }
+/* Header */
+header { background: radial-gradient(circle at top left,#0b1a2c,#0d253f); color:white; padding:60px 20px; text-align:center; position:relative; overflow:hidden; }
+header h1 { margin:0; font-size:2.8em; letter-spacing:1px; }
+header p { margin:10px 0 0; font-size:1.2em; color:#60a5fa; }
 
-    h2 {
-        margin-top: 0;
-    }
+/* Sobre Mim */
+.about { max-width:800px; margin:40px auto; text-align:center; background:#0d253f; padding:35px; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.5); }
+.about h2 { color:#60a5fa; margin-bottom:20px; font-size:2em; }
+.about p { font-size:1em; line-height:1.7; color:#e2e8f0; }
 
-    /* ====== Header ====== */
-    header {
-        background: radial-gradient(circle at top left, #0b1a2c, #0d253f);
-        color: white;
-        padding: 60px 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
+/* Projetos */
+.projects { display:flex; justify-content:center; gap:25px; flex-wrap:wrap; max-width:1200px; margin:0 auto 60px auto; padding:0 20px; }
+.project-card { border-radius:15px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.4); flex:1 1 300px; max-width:350px; transition: transform 0.5s, box-shadow 0.5s, opacity 0.6s, transform 0.6s; opacity:0; transform:translateY(30px); position:relative; text-align:center; color:#fff; }
+.project-card.visible { opacity:1; transform:translateY(0); }
+.project-card:hover { transform:translateY(-10px); box-shadow:0 12px 30px rgba(0,0,0,0.7); }
+.project-card img { width:100%; height:200px; object-fit:cover; transition: transform 0.5s; }
+.project-card:hover img { transform:scale(1.05); }
+.project-info { padding:20px; }
+.project-info h3 { margin-top:0; font-size:1.3em; margin-bottom:10px; }
 
-    header h1 {
-        margin: 0;
-        font-size: 2.8em;
-        color: #ffffff; /* branco */
-        letter-spacing: 1px;
-        z-index: 2;
-        position: relative;
-    }
+/* cores */
+.projeto1 { background-color:#2E8B57; } /* verde floresta */
+.projeto2 { background-color:#3CB371; } /* verde metálico */
+.downloads { background-color:#4682B4; } /* azul metálico */
 
-    header p {
-        margin: 10px 0 0;
-        font-size: 1.2em;
-        color: #60a5fa; /* azul claro */
-        z-index: 2;
-        position: relative;
-    }
+/* Botões */
+.btn-quiz { display:inline-block; margin-top:15px; padding:12px 25px; border-radius:8px; font-weight:bold; color:#fff; background:linear-gradient(45deg,#166534,#15803d); transition:transform 0.3s, box-shadow 0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.4); }
+.btn-quiz:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.6); }
 
-    header::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: repeating-linear-gradient(
-            45deg,
-            rgba(96, 165, 250, 0.05) 0,
-            rgba(96, 165, 250, 0.05) 1px,
-            transparent 1px,
-            transparent 10px
-        );
-        animation: moveLines 20s linear infinite;
-        z-index: 1;
-    }
+.btn-download { display:inline-block; margin-top:15px; padding:12px 25px; border-radius:8px; font-weight:bold; color:#fff; background:linear-gradient(45deg,#3b82f6,#60a5fa); transition:transform 0.3s, box-shadow 0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.4); }
+.btn-download:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.6); }
 
-    @keyframes moveLines {
-        from { transform: rotate(0deg) translate(0,0); }
-        to { transform: rotate(360deg) translate(0,0); }
-    }
+/* Footer */
+footer { text-align:center; padding:25px; background-color:#0b1a2c; color:white; box-shadow:0 -4px 12px rgba(0,0,0,0.5); }
+footer a { color:#60a5fa; margin:0 10px; transition:color 0.3s; }
+footer a:hover { color:#3b82f6; }
 
-    /* ====== Sobre Mim ====== */
-    .about {
-        max-width: 800px;
-        margin: 40px auto;
-        text-align: center;
-        background: #0d253f; /* azul escuro */
-        padding: 35px;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-        transition: transform 0.3s;
-    }
-
-    .about:hover {
-        transform: translateY(-5px);
-    }
-
-    .about h2 {
-        color: #60a5fa; /* azul claro */
-        margin-bottom: 20px;
-        font-size: 2em;
-    }
-
-    .about p {
-        font-size: 1em;
-        line-height: 1.7;
-        color: #e2e8f0;
-    }
-
-    /* ====== Projetos ====== */
-    .projects {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto 60px auto;
-        padding: 0 20px;
-    }
-
-    .project-card {
-        background-color: #0d253f; /* fundo do card azul escuro */
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        flex: 1 1 300px;
-        max-width: 350px;
-        transition: transform 0.5s, box-shadow 0.5s, opacity 0.6s, transform 0.6s;
-        opacity: 0;
-        transform: translateY(30px);
-        position: relative;
-    }
-
-    .project-card.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .project-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-    }
-
-    .project-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.5s;
-    }
-
-    .project-card:hover img {
-        transform: scale(1.05);
-    }
-
-    .project-info {
-        padding: 20px;
-        text-align: center;
-    }
-
-    .project-info h3 {
-        margin-top: 0;
-        color: #60a5fa; /* azul claro */
-        font-size: 1.3em;
-        margin-bottom: 10px;
-        transition: color 0.3s;
-    }
-
-    .project-info p {
-        color: #cbd5e1;
-        font-size: 0.95em;
-    }
-
-    /* ====== Botões ====== */
-    .btn-quiz {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-weight: bold;
-        color: #fff;
-        background: linear-gradient(45deg, #166534, #15803d); /* verde escuro */
-        transition: transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    .btn-quiz:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    }
-
-    .btn-download {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-weight: bold;
-        color: #fff;
-        background: linear-gradient(45deg, #3b82f6, #60a5fa); /* azul claro */
-        transition: transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    .btn-download:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-    }
-
-    /* ====== Footer ====== */
-    footer {
-        text-align: center;
-        padding: 25px;
-        background-color: #0b1a2c;
-        color: white;
-        box-shadow: 0 -4px 12px rgba(0,0,0,0.5);
-    }
-
-    footer a {
-        color: #60a5fa;
-        margin: 0 10px;
-        transition: color 0.3s;
-    }
-
-    footer a:hover {
-        color: #3b82f6;
-    }
-
-    /* ====== Responsivo ====== */
-    @media (max-width: 900px) {
-        .projects {
-            gap: 20px;
-        }
-    }
-
-    @media (max-width: 650px) {
-        .projects {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
+/* Responsivo */
+@media (max-width:900px){ .projects{gap:20px;} }
+@media (max-width:650px){ .projects{flex-direction:column; align-items:center;} }
 </style>
 </head>
 <body>
@@ -243,31 +61,30 @@
 <div class="about">
     <h2>Sobre Mim</h2>
     <p>
-       Olá, sou Daniela, profissional de TI com mais de 10 anos de experiência. Pós-graduada em Análise de Sistemas 
-        e graduada em Redes de Computadores. Atuo em <strong>Suporte Técnico em Hardware e Software</strong>, 
-        <strong>Infraestrutura</strong>, <strong>Zabbix e SLA</strong>, e também como <strong>Docente na área de Tecnologia</strong>. 
-        Possuo conhecimento intermediário em <strong>Azure</strong>, <strong>Cloud Computing</strong> e <strong>GitHub</strong>.
+        Olá, sou Daniela, profissional de TI com mais de 10 anos de experiência. Pós-graduada em Análise de Sistemas e graduada em Redes de Computadores. 
+        Atuo em <strong>Suporte Técnico em Hardware e Software</strong>, <strong>Infraestrutura</strong>, <strong>Zabbix e SLA</strong>, 
+        e também como <strong>Docente na área de Tecnologia</strong>. Possuo conhecimento intermediário em <strong>Azure</strong>, <strong>Cloud Computing</strong> e <strong>GitHub</strong>.
     </p>
 </div>
 
 <div class="projects">
-    <div class="project-card">
-        <img src="assets/projeto1.jpg" alt="Projeto Quiz 1">
+    <div class="project-card projeto1">
+        <img src="assets/projeto1.jpg" alt="Projeto 1">
         <div class="project-info">
-            <h3> Resposta Interativo</h3>
+            <h3>Projeto 1 - Resposta Interativa</h3>
             <a href="Projeto1/quiz.html" class="btn-quiz" target="_blank">Responder</a>
         </div>
     </div>
 
-    <div class="project-card">
-        <img src="assets/projeto2.jpg" alt="Projeto Quiz 2">
+    <div class="project-card projeto2">
+        <img src="assets/projeto2.jpg" alt="Projeto 2">
         <div class="project-info">
-            <h3>Perguntas Tecnológicas</h3>
+            <h3>Projeto 2 - Perguntas Tecnológicas</h3>
             <a href="Projeto2/quiz2.html" class="btn-quiz" target="_blank">Responder</a>
         </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card downloads">
         <img src="assets/projeto3.jpg" alt="Currículo Daniela">
         <div class="project-info">
             <h3>Download do Currículo</h3>
@@ -278,5 +95,22 @@
 </div>
 
 <footer>
-    <p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> | 
-    <a href
+    <p>Contatos:</p>
+    <p>Email: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">Meu LinkedIn</a></p>
+    <p>GitHub: <a href="https://github.com/danielaleao83" target="_blank">Meu GitHub</a></p>
+    <p>&copy; 2025 Daniela Leão da Silva</p>
+</footer>
+
+<script>
+// animação fade-in dos cards
+const cards = document.querySelectorAll('.project-card');
+window.addEventListener('load', () => {
+    cards.forEach((card, index) => {
+        setTimeout(() => { card.classList.add('visible'); }, index*300);
+    });
+});
+</script>
+
+</body>
+</html>
