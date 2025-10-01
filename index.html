@@ -5,219 +5,131 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
 <style>
-/* ===== BODY E LAYOUT ===== */
-body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    color: #ffffff;
-    background: linear-gradient(135deg, #0b1a2c, #0f172a);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-}
+/* Fontes clássicas elegantes */
+body, button, a, p { font-family: 'Georgia', serif; margin:0; padding:0; box-sizing:border-box; }
+body { background: #0a1b2e; color: #ffffff; overflow:hidden; }
 
-/* ===== HEADER ===== */
-header {
-    text-align: center;
-    padding: 25px;
-}
-header h1 {
-    font-size: 3em;
-}
-header p {
-    font-size: 1.2em;
-    color: #7ec8e3; /* azul bebê */
-    margin-top: 8px;
-}
+/* Header */
+header { background: linear-gradient(135deg,#0d1b2a,#1e293b); color:#fff; padding:40px 20px; text-align:center; }
+header h1 { font-size:3em; margin-bottom:10px; }
+header p { font-size:1.3em; color:#7ec8e3; }
 
-/* ===== SOBRE MIM ===== */
-.about {
-    text-align: center;
-    background: #0f172a;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 12px;
-    font-size: 1em;
-    line-height: 1.6;
-    color: #ffffff;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s forwards;
-}
+/* Container central */
+.container { display:flex; justify-content:center; align-items:flex-start; gap:30px; padding:40px; flex-wrap:wrap; }
 
-/* ===== PROJETOS ===== */
-.projects {
-    display: flex;
-    justify-content: space-around;
-    gap: 15px;
-    margin: 10px;
-    flex-wrap: wrap;
-}
+/* Cards de Projetos e Download */
+.card { border-radius:15px; padding:25px; width:320px; text-align:center; position:relative; box-shadow:0 8px 25px rgba(0,0,0,0.5); transition: transform 0.5s, box-shadow 0.5s; }
+.card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
 
-.project-card {
-    flex: 1;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    font-family: 'Georgia', serif;
-    font-size: 0.95em;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s forwards;
-}
-.project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+/* Projeto 1 e 2 */
+.quiz-card { background: linear-gradient(135deg,#14532d,#166534); color:#ffffff; }
+.quiz-card h3 { font-size:1.5em; margin-bottom:15px; }
 
-.project-card h3 { margin-bottom: 12px; }
+/* Download */
+.download-card { background: linear-gradient(135deg,#1e293b,#0f172a); }
+.download-card h3 { font-size:1.5em; margin-bottom:15px; }
 
-/* Mesma cor para ambos os quizzes */
-.quiz-card { background: #14532d; }
+/* Botões */
+button, .btn { font-family: 'Georgia', serif; font-size:1em; padding:12px 25px; border-radius:10px; border:none; cursor:pointer; transition: all 0.3s ease; }
+button:hover, .btn:hover { transform: translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.6); }
+.start-btn { background:#15803d; color:white; font-size:1.1em; }
+.download-btn { background:#3b82f6; color:white; font-size:1.1em; margin-top:10px; display:inline-block; }
 
-/* Currículo */
-.download-card { background: #1e293b; }
-.btn-download {
-    padding: 10px 18px;
-    margin: 5px;
-    border: none;
-    border-radius: 6px;
-    background: #3b82f6;
-    color: #ffffff;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    font-family: 'Georgia', serif;
-}
-.btn-download:hover { background: #2563eb; transform: translateY(-3px); }
+/* Quiz Container */
+.quiz-container { display:none; margin-top:20px; }
+.options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; font-size:1em; }
+.options button:hover { background:#374151; }
+.correct { background:#15803d !important; }
+.wrong { background:#b91c1c !important; }
+.timer { margin:10px 0; font-weight:bold; color:#facc15; }
 
-/* ===== QUIZ ===== */
-.quiz-container { display:none; margin-top:10px; }
-.options button {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    background: #1e3a5f;
-    color: #fff;
-    font-family: 'Georgia', serif;
-    transition: background 0.3s, transform 0.2s;
-}
-.options button:hover { background: #374151; transform: scale(1.02); }
-.correct { background: #15803d !important; }
-.wrong { background: #b91c1c !important; }
-.timer { margin: 8px 0; font-weight: bold; color: #fbbf24; animation: pulse 1s infinite alternate; }
-
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 15px;
-    background: #0b1a2c;
-}
-footer a { text-decoration: none; font-family: 'Georgia', serif; transition: color 0.3s; }
-footer .email { color: #facc15; }
-footer .linkedin { color: #fbbf24; }
-footer .github { color: #ffffff; }
-footer a:hover { transform: scale(1.05); }
-
-/* ===== ANIMAÇÕES ===== */
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-    to { color: #fcd34d; }
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width:900px){ .projects{flex-direction: column; align-items:center;} }
+/* Footer */
+footer { text-align:center; padding:25px; background:#0b1a2c; margin-top:30px; }
+footer a { text-decoration:none; font-weight:normal; transition: color 0.3s; }
+.email { color:#facc15; }
+.linkedin { color:#fbbf24; }
+.github { color:#ffffff; }
+footer a:hover { opacity:0.8; }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Daniela Leão da Silva</h1>
-    <p>Profissional de TI | Infraestrutura | Docente em Tecnologia | Azure | Cloud Computing</p>
+  <h1>Daniela Leão da Silva</h1>
+  <p>Profissional de TI | Infraestrutura | Docente em Tecnologia | Azure | Cloud Computing</p>
 </header>
 
-<div class="about">
-    Olá, sou Daniela, profissional de TI com mais de 10 anos de experiência. Pós-graduada em Análise de Sistemas e graduada em Redes de Computadores. Atuo em Suporte Técnico em Hardware e Software, Infraestrutura, Zabbix e SLA, e também como Docente na área de Tecnologia. Possuo conhecimento intermediário em Azure, Cloud Computing e GitHub.
-</div>
+<div class="container">
 
-<div class="projects">
-
-    <!-- Projeto 1 -->
-    <div class="project-card quiz-card" style="animation-delay:0.2s;">
-        <h3>Projeto 1 - Temas Atuais</h3>
-        <button class="btn-download" onclick="startQuiz(1)">Iniciar Quiz</button>
-        <div id="quiz1" class="quiz-container">
-            <p class="timer" id="timer1"></p>
-            <p id="question1"></p>
-            <div class="options" id="options1"></div>
-            <p id="result1"></p>
-        </div>
+  <!-- Projeto 1 -->
+  <div class="card quiz-card">
+    <h3>Quiz - Temas Atuais</h3>
+    <button class="start-btn" onclick="startQuiz(1)">Responder</button>
+    <div id="quiz1" class="quiz-container">
+      <p class="timer" id="timer1"></p>
+      <p id="question1"></p>
+      <div class="options" id="options1"></div>
+      <p id="result1"></p>
     </div>
+  </div>
 
-    <!-- Projeto 2 -->
-    <div class="project-card quiz-card" style="animation-delay:0.4s;">
-        <h3>Projeto 2 - Informática & Celular</h3>
-        <button class="btn-download" onclick="startQuiz(2)">Iniciar Quiz</button>
-        <div id="quiz2" class="quiz-container">
-            <p class="timer" id="timer2"></p>
-            <p id="question2"></p>
-            <div class="options" id="options2"></div>
-            <p id="result2"></p>
-        </div>
+  <!-- Projeto 2 -->
+  <div class="card quiz-card">
+    <h3>Quiz - Informática & Celular</h3>
+    <button class="start-btn" onclick="startQuiz(2)">Responder</button>
+    <div id="quiz2" class="quiz-container">
+      <p class="timer" id="timer2"></p>
+      <p id="question2"></p>
+      <div class="options" id="options2"></div>
+      <p id="result2"></p>
     </div>
+  </div>
 
-    <!-- Currículo -->
-    <div class="project-card download-card" style="animation-delay:0.6s;">
-        <h3>Currículo Daniela</h3>
-        <p>Baixe ou visualize meu currículo.</p>
-        <a href="assets/Curriculo-Daniela-Leao.pdf" class="btn-download" download>Baixar</a>
-        <a href="assets/Curriculo-Daniela-Leao.pdf" class="btn-download" target="_blank">Visualizar</a>
-    </div>
+  <!-- Download -->
+  <div class="card download-card">
+    <h3>Currículo Daniela</h3>
+    <p>Baixe ou visualize meu currículo .</p>
+    <a href="assets/Curriculo-Daniela-Leao.pdf" target="_blank" class="download-btn">Visualizar</a>
+    <a href="assets/Curriculo-Daniela-Leao.pdf" download class="download-btn">Baixar</a>
+  </div>
 
 </div>
 
 <footer>
-    <p>Contato:</p>
-    <p>Email: <a href="mailto:daniela.leao83@gmail.com" class="email">daniela.leao83@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank" class="linkedin">Meu LinkedIn</a></p>
-    <p>GitHub: <a href="https://github.com/danielaleao83" target="_blank" class="github">Meu GitHub</a></p>
-    <p>&copy; 2025 Daniela Leão da Silva</p>
+  <p>Contato:</p>
+  <p>Email: <a href="mailto:daniela.leao83@gmail.com" class="email">daniela.leao83@gmail.com</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank" class="linkedin">Meu LinkedIn</a></p>
+  <p>GitHub: <a href="https://github.com/danielaleao83" target="_blank" class="github">Meu GitHub</a></p>
+  <p>&copy; 2025 Daniela Leão da Silva</p>
 </footer>
 
 <script>
-// ----- Perguntas Projeto 1 -----
+// Perguntas Projeto 1 (10 perguntas aleatórias sobre temas atuais)
 const quiz1Questions = [
-  {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
-  {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
-  {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
-  {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
-  {q:"A crise energética de 2022 foi causada principalmente por:", o:["Conflito Rússia-Ucrânia","Pandemia","Greve global","Mudança climática"], a:0},
-  {q:"Qual país saiu da União Europeia em 2020?", o:["Reino Unido","França","Alemanha","Itália"], a:0},
-  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","Bolsonaro","Dilma","Ciro"], a:0},
-  {q:"Qual empresa comprou o Twitter em 2022?", o:["Elon Musk","Meta","Microsoft","Apple"], a:0},
-  {q:"Qual país é o maior emissor de CO2 do mundo?", o:["China","EUA","Índia","Rússia"], a:0},
-  {q:"Qual evento esportivo será em 2028?", o:["Olimpíadas de Los Angeles","Copa no Brasil","Eurocopa","Copa da África"], a:0}
+  { q: "Qual país sediará a Copa do Mundo de 2026?", o: ["EUA, Canadá e México", "Brasil", "Inglaterra", "Japão"], a:0 },
+  { q: "Quem é o atual secretário-geral da ONU?", o: ["António Guterres", "Ban Ki-moon", "Joe Biden", "Olaf Scholz"], a:0 },
+  { q: "Qual moeda digital oficial foi lançada na China?", o: ["e-CNY", "Bitcoin", "e-Euro", "Digital Yen"], a:0 },
+  { q: "O ChatGPT foi criado por qual empresa?", o: ["OpenAI", "Google", "Microsoft", "Amazon"], a:0 },
+  { q: "A crise energética de 2022 foi causada principalmente por:", o: ["Conflito Rússia-Ucrânia", "Pandemia", "Greve global", "Mudança climática"], a:0 },
+  { q: "Qual país saiu da União Europeia em 2020?", o: ["Reino Unido", "França", "Alemanha", "Itália"], a:0 },
+  { q: "Quem é o atual presidente do Brasil (2025)?", o: ["Lula", "Bolsonaro", "Dilma", "Ciro"], a:0 },
+  { q: "Qual empresa comprou o Twitter em 2022?", o: ["Elon Musk", "Meta", "Microsoft", "Apple"], a:0 },
+  { q: "Qual país é o maior emissor de CO2 do mundo?", o: ["China", "EUA", "Índia", "Rússia"], a:0 },
+  { q: "Qual evento esportivo será em 2028?", o: ["Olimpíadas de Los Angeles", "Copa no Brasil", "Eurocopa", "Copa da África"], a:0 }
 ];
 
-// ----- Perguntas Projeto 2 -----
+// Perguntas Projeto 2 (20 perguntas informática & celular)
 const quiz2Questions = [
-  {q:"O que significa CPU?", o:["Central Processing Unit","Computer Personal Unit","Central Phone Utility","Control Program Usage"], a:0},
-  {q:"O que é RAM?", o:["Memória de acesso aleatório","Processador","Sistema Operacional","Armazenamento"], a:0},
-  {q:"Qual empresa fabrica o sistema Android?", o:["Google","Apple","Microsoft","Samsung"], a:0},
-  {q:"O que significa Wi-Fi?", o:["Wireless Fidelity","Wired Fire","Wide Fiber","Web Function"], a:0},
-  {q:"Qual é o sistema operacional do iPhone?", o:["iOS","Android","Windows Phone","Symbian"], a:0},
-  {q:"O que é phishing?", o:["Ataque virtual de roubo de dados","Antivírus","Firewall","Backup"], a:0},
-  {q:"O que é um SSD?", o:["Disco de estado sólido","Servidor seguro de dados","Software de segurança digital","Sistema simples de disco"], a:0},
-  {q:"Qual a função do antivírus?", o:["Proteger contra malware","Aumentar velocidade","Fazer backup","Formatar o PC"], a:0},
-  {q:"Bluetooth serve para:", o:["Conexão sem fio de curto alcance","Internet via satélite","Redes cabeadas","Energia elétrica"], a:0},
-  {q:"Qual navegador é da Microsoft?", o:["Edge","Chrome","Firefox","Safari"], a:0},
-  {q:"O que significa URL?", o:["Uniform Resource Locator","Universal Router Link","User Remote Login","Ultra Rapid Language"], a:0},
-  {q:"Um byte possui quantos bits?", o:["8","4","16","32"], a:0},
-  {q:"O que é HTML?", o:["Linguagem de marcação de hipertexto","Banco de dados","Protocolo de rede","Software de design"], a
+  { q:"O que significa CPU?", o:["Central Processing Unit","Computer Personal Unit","Central Phone Utility","Control Program Usage"], a:0 },
+  { q:"O que é RAM?", o:["Memória de acesso aleatório","Processador","Sistema Operacional","Armazenamento"], a:0 },
+  { q:"Qual empresa fabrica o sistema Android?", o:["Google","Apple","Microsoft","Samsung"], a:0 },
+  { q:"O que significa Wi-Fi?", o:["Wireless Fidelity","Wired Fire","Wide Fiber","Web Function"], a:0 },
+  { q:"Qual é o sistema operacional do iPhone?", o:["iOS","Android","Windows Phone","Symbian"], a:0 },
+  { q:"O que é phishing?", o:["Ataque virtual de roubo de dados","Antivírus","Firewall","Backup"], a:0 },
+  { q:"O que é um SSD?", o:["Disco de estado sólido","Servidor seguro de dados","Software de segurança digital","Sistema simples de disco"], a:0 },
+  { q:"Qual a função do antivírus?", o:["Proteger contra malware","Aumentar velocidade","Fazer backup","Formatar o PC"], a:0 },
+  { q:"Bluetooth serve para:", o:["Conexão sem fio de curto alcance","Internet via satélite","Redes cabeadas","Energia elétrica"], a:0 },
+  { q:"Qual navegador é da Microsoft?", o:["Edge","Chrome","Firefox","Safari"], a:0 },
+  { q:"O que significa URL?", o:["Uniform Resource Locator","Universal Router Link","User Remote Login","Ultra Rapid Language"], a:0 },
+  { q:"Um byte possui quantos bits?", o:["8","4","16","32"], a:0 },
+  { q:"O que é HTML?", o:["Linguagem de
