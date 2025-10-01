@@ -5,22 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
 <style>
-body { font-family: "Arial", sans-serif; margin:0; padding:0; background-color:#0a1b2e; color:#e5e7eb; }
-h1,h2 { text-align:center; margin:20px 0; }
-a { text-decoration:none; }
+/* Fonte geral elegante, sem negrito */
+body { 
+    font-family: 'Georgia', serif; 
+    font-weight: normal; 
+    margin:0; padding:0; 
+    background-color:#0a1b2e; 
+    color:#e5e7eb; 
+}
+a { text-decoration:none; font-weight: normal; }
 
 /* Header */
-header { background: radial-gradient(circle at top left,#0b1a2c,#0d253f); color:white; padding:60px 20px; text-align:center; }
-header h1 { margin:0; font-size:2.5em; }
-header p { margin:10px 0 0; font-size:1.2em; color:#60a5fa; }
+header { 
+    background: radial-gradient(circle at top left,#0b1a2c,#0d253f); 
+    color:white; 
+    padding:60px 20px; 
+    text-align:center; 
+}
+header h1 { 
+    margin:0; 
+    font-size:2.8em; 
+}
+header p { 
+    margin:10px 0 0; 
+    font-size:1.2em; 
+    color:#9ec5f7; /* azul bebê elegante */ 
+}
+
+/* Sobre Mim */
+.about { 
+    max-width:800px; 
+    margin:40px auto; 
+    text-align:center; 
+    background:#0d253f; 
+    padding:35px; 
+    border-radius:15px; 
+    box-shadow:0 8px 20px rgba(0,0,0,0.5); 
+}
+.about h2 { 
+    color:#60a5fa; 
+    margin-bottom:20px; 
+    font-size:2em; 
+}
+.about p { 
+    font-size:1em; 
+    line-height:1.7; 
+    color:white; 
+}
 
 /* Container projetos */
-.projects { display:flex; justify-content:center; gap:25px; flex-wrap:wrap; max-width:1200px; margin:40px auto; padding:0 20px; }
-.project-card { border-radius:15px; background:#0d253f; box-shadow:0 4px 15px rgba(0,0,0,0.4); flex:1 1 300px; max-width:350px; padding:20px; text-align:center; }
-.project-card h3 { color:#60a5fa; margin-bottom:15px; }
+.projects { 
+    display:flex; 
+    justify-content:center; 
+    gap:25px; 
+    flex-wrap:wrap; 
+    max-width:1200px; 
+    margin:40px auto; 
+    padding:0 20px; 
+}
 
-/* Botões */
-button, .btn-download { padding:10px 20px; margin-top:15px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; }
+/* Projetos cards */
+.project-card { 
+    border-radius:15px; 
+    padding:20px; 
+    text-align:center; 
+    font-family:'Georgia', serif; 
+    font-weight:normal;
+    color:white; 
+    flex:1 1 300px; 
+    max-width:350px; 
+    box-shadow:0 4px 15px rgba(0,0,0,0.4); 
+}
+
+/* Cores dos cards */
+.projeto1 { background-color:#155724; } /* verde escuro */
+.projeto2 { background-color:#155724; } /* verde escuro */
+.downloads { background-color:#1f2937; } /* azul grafite escuro */
+
+/* Títulos e botões */
+.project-card h3 { margin-bottom:15px; font-weight: normal; }
+button, .btn-download { 
+    padding:10px 20px; 
+    margin-top:15px; 
+    border:none; 
+    border-radius:8px; 
+    cursor:pointer; 
+    font-family:'Georgia', serif; 
+    font-weight:normal;
+}
 .start-btn { background:#15803d; color:white; }
 .start-btn:hover { background:#166534; }
 .btn-download { background:#3b82f6; color:white; display:inline-block; }
@@ -28,16 +100,39 @@ button, .btn-download { padding:10px 20px; margin-top:15px; border:none; border-
 
 /* Quiz */
 .quiz-container { display:none; }
-.options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; }
+.options button { 
+    display:block; 
+    width:100%; 
+    margin:8px 0; 
+    padding:10px; 
+    border-radius:6px; 
+    border:none; 
+    cursor:pointer; 
+    background:#1e3a5f; 
+    color:white; 
+    font-family:'Georgia', serif; 
+}
 .options button:hover { background:#374151; }
 .correct { background:#15803d !important; }
 .wrong { background:#b91c1c !important; }
 .timer { margin:10px 0; font-weight:bold; color:#fbbf24; }
 
 /* Footer */
-footer { text-align:center; padding:25px; background:#0b1a2c; color:white; margin-top:40px; }
-footer a { color:#60a5fa; margin:0 10px; }
-footer a:hover { color:#3b82f6; }
+footer { 
+    font-family:'Georgia', serif; 
+    font-weight:normal; 
+    text-align:center; 
+    padding: 25px; 
+    background:#0b1a2c; 
+    color:white; 
+}
+footer a { color:#b58900; font-weight: normal; margin:0 10px; } /* amarelo metálico escuro/ouro */
+footer a:hover { color:#ffd700; }
+
+/* Responsivo */
+@media (max-width:900px){ .projects{gap:20px;} }
+@media (max-width:650px){ .projects{flex-direction:column; align-items:center;} }
+
 </style>
 </head>
 <body>
@@ -47,12 +142,21 @@ footer a:hover { color:#3b82f6; }
   <p>Profissional de TI | Infraestrutura | Docente em Tecnologia | Azure | Cloud Computing</p>
 </header>
 
+<div class="about">
+    <h2>Sobre Mim</h2>
+    <p>
+        Olá, sou Daniela, profissional de TI com mais de 10 anos de experiência. Pós-graduada em Análise de Sistemas e graduada em Redes de Computadores. 
+        Atuo em <strong>Suporte Técnico em Hardware e Software</strong>, <strong>Infraestrutura</strong>, <strong>Zabbix e SLA</strong>, 
+        e também como <strong>Docente na área de Tecnologia</strong>. Possuo conhecimento intermediário em <strong>Azure</strong>, <strong>Cloud Computing</strong> e <strong>GitHub</strong>.
+    </p>
+</div>
+
 <div class="projects">
 
   <!-- Projeto 1 -->
-  <div class="project-card">
-    <h3> Responder - Temas Atuais</h3>
-    <button class="start-btn" onclick="startQuiz(1)">Iniciar Quiz</button>
+  <div class="project-card projeto1">
+    <h3>Projeto 1 - Resposta Interativa</h3>
+    <button class="start-btn" onclick="startQuiz(1)">Responder</button>
     <div id="quiz1" class="quiz-container">
       <p class="timer" id="timer1"></p>
       <p id="question1"></p>
@@ -62,9 +166,9 @@ footer a:hover { color:#3b82f6; }
   </div>
 
   <!-- Projeto 2 -->
-  <div class="project-card">
-    <h3> Responder - Informática & Celular</h3>
-    <button class="start-btn" onclick="startQuiz(2)">Iniciar Quiz</button>
+  <div class="project-card projeto2">
+    <h3>Projeto 2 - Perguntas Tecnológicas</h3>
+    <button class="start-btn" onclick="startQuiz(2)">Responder</button>
     <div id="quiz2" class="quiz-container">
       <p class="timer" id="timer2"></p>
       <p id="question2"></p>
@@ -74,16 +178,17 @@ footer a:hover { color:#3b82f6; }
   </div>
 
   <!-- Download -->
-  <div class="project-card">
-    <h3>Download do Currículo</h3>
-    <p>Baixe meu currículo atualizado em PDF.</p>
+  <div class="project-card downloads">
+    <h3>Currículo Daniela</h3>
+    <p>Baixe meu currículo atualizado em PDF ou visualize</p>
     <a href="assets/Curriculo-Daniela-Leao.pdf" class="btn-download" download>Download</a>
   </div>
 
 </div>
 
 <footer>
-  <p>Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a></p>
+  <p>Contato:</p>
+  <p>Email: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a></p>
   <p>LinkedIn: <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">Meu LinkedIn</a></p>
   <p>GitHub: <a href="https://github.com/danielaleao83" target="_blank">Meu GitHub</a></p>
   <p>&copy; 2025 Daniela Leão da Silva</p>
@@ -123,61 +228,4 @@ const quiz2Questions = [
   { q:"O que é cloud computing?", o:["Serviços na nuvem","Cabos de internet","Hardware portátil","Rede local"], a:0 },
   { q:"O que significa 5G?", o:["Quinta geração de rede móvel","5 gigabytes de internet","5 usuários conectados","5 gráficos digitais"], a:0 },
   { q:"Firewall serve para:", o:["Proteger a rede","Armazenar arquivos","Editar imagens","Compactar dados"], a:0 },
-  { q:"Qual dispositivo usa Android?", o:["Smartphone","Geladeira","TV antiga","Pen drive"], a:0 },
-  { q:"Qual é o criador do iPhone?", o:["Apple","Google","Samsung","Nokia"], a:0 },
-  { q:"Excel é usado para:", o:["Planilhas","Edição de vídeos","Design 3D","Programação"], a:0 }
-];
-
-// Função Quiz
-function startQuiz(num) {
-  let questions = (num===1? quiz1Questions: quiz2Questions);
-  let timeLimit = (num===1?20:30);
-  let qIndex=0, score=0, timer, timeLeft=timeLimit;
-
-  const quizEl=document.getElementById("quiz"+num);
-  const qEl=document.getElementById("question"+num);
-  const optEl=document.getElementById("options"+num);
-  const resEl=document.getElementById("result"+num);
-  const tEl=document.getElementById("timer"+num);
-
-  quizEl.style.display="block";
-  resEl.innerHTML="";
-
-  function loadQuestion(){
-    if(qIndex>=questions.length){
-      resEl.innerHTML=`Você acertou ${score} de ${questions.length}! <br><button onclick="startQuiz(${num})">Recomeçar</button>`;
-      qEl.innerHTML=""; optEl.innerHTML=""; tEl.innerHTML="";
-      return;
-    }
-    timeLeft=timeLimit;
-    tEl.innerHTML=`Tempo: ${timeLeft}s`;
-    qEl.innerHTML=questions[qIndex].q;
-    optEl.innerHTML="";
-    questions[qIndex].o.forEach((op,i)=>{
-      const btn=document.createElement("button");
-      btn.textContent=op;
-      btn.onclick=()=>checkAnswer(i,btn);
-      optEl.appendChild(btn);
-    });
-    clearInterval(timer);
-    timer=setInterval(()=>{
-      timeLeft--;
-      tEl.innerHTML=`Tempo: ${timeLeft}s`;
-      if(timeLeft<=0){ clearInterval(timer); nextQ(); }
-    },1000);
-  }
-
-  function checkAnswer(i,btn){
-    clearInterval(timer);
-    if(i===questions[qIndex].a){ btn.classList.add("correct"); score++; }
-    else { btn.classList.add("wrong"); }
-    setTimeout(nextQ,1000);
-  }
-
-  function nextQ(){ qIndex++; loadQuestion(); }
-  loadQuestion();
-}
-</script>
-
-</body>
-</html>
+  { q:"Qual dispositivo usa Android?", o:["Smartphone","
