@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -118,20 +118,30 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
     box-shadow: 0 0 8px #f43f5e;
 }
 
-/* Download Cards */
+/* Download Cards futurista */
 .download-card { 
     background: linear-gradient(135deg,#064e3b,#065f46);
     color:#fff; 
     box-shadow: 0 0 15px rgba(59,130,246,0.5);
 }
 .download-card a { 
-    display:block; margin-top:10px; padding:10px 15px; border-radius:8px; 
-    background:#3b82f6; color:#fff; transition:0.3s; 
-    box-shadow: 0 0 8px #3b82f6;
+    display:block; 
+    margin-top:10px; 
+    padding:10px 15px; 
+    border-radius:8px; 
+    background: linear-gradient(145deg, #102a44, #1c3f72);
+    color:#fff; 
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow: 0 0 5px #0ea5e9, 2px 2px 6px rgba(0,0,0,0.6),
+                inset -2px -2px 4px rgba(255,255,255,0.05),
+                inset 2px 2px 4px rgba(0,0,0,0.5);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 .download-card a:hover { 
-    background:#2563eb; 
-    box-shadow: 0 0 15px #3b82f6;
+    background: linear-gradient(145deg, #1a365d, #2a4f8a);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #0ea5e9, 2px 2px 8px rgba(0,0,0,0.8);
 }
 
 /* Quiz Container */
@@ -223,4 +233,9 @@ footer a { color:#7fdbff; margin:0 10px; }
 // ===== Perguntas =====
 const quizData = [
   {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
-  {q:"Quem é o atual secretário-geral da ONU?", o:["Ant
+  {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
+  {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
+  {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
+  {q:"A crise energética de 2022 foi causada por?", o:["Conflito Rússia-Ucrânia","Pandemia","Greve global","Mudança climática"], a:0},
+  {q:"Qual país saiu da União Europeia em 2020?", o:["Reino Unido","França","Alemanha","Itália"], a:0},
+  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","
