@@ -5,111 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
 <style>
-    /* ===== Geral ===== */
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        background: linear-gradient(135deg,#0b1a2c,#1a2a44);
-        color: #e0e7ff;
-        animation: bgAnimation 15s ease-in-out infinite alternate;
-    }
+/* ===== Geral ===== */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg,#0b1a2c,#1a2a44);
+    color: #e0e7ff;
+}
+a { text-decoration: none; }
 
-    @keyframes bgAnimation {
-        0% {background-position:0% 50%;}
-        50% {background-position:100% 50%;}
-        100% {background-position:0% 50%;}
-    }
+/* ===== Header ===== */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+header h1 { color: #ffffff; font-size: 2.5em; margin:0; }
+header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 
-    a { text-decoration: none; }
+/* ===== Container central ===== */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
 
-    /* ===== Header ===== */
-    header {
-        text-align: center;
-        padding: 50px 20px;
-        background: rgba(0,0,0,0.6);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        animation: headerGlow 2s ease-in-out infinite alternate;
-    }
-    header h1 { color: #ffffff; font-size: 2.5em; margin:0; }
-    header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
+/* ===== Cards ===== */
+.card {
+    border-radius:15px;
+    padding:25px;
+    width:320px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 8px 25px rgba(0,0,0,0.5);
+    transition: transform 0.5s, box-shadow 0.5s;
+    background: rgba(0,0,0,0.7);
+}
+.card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
 
-    @keyframes headerGlow {
-        0% {text-shadow: 0 0 10px #00f, 0 0 20px #00f;}
-        50% {text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;}
-        100% {text-shadow: 0 0 10px #00f, 0 0 20px #00f;}
-    }
+/* Quiz Cards */
+.quiz-card { background: linear-gradient(135deg,#14532d,#166534); color:#fff; }
+.quiz-card h3 { font-size:1.5em; margin-bottom:15px; }
+.quiz-card button { padding:10px 15px; border:none; border-radius:8px; background:#0ea5e9; color:#fff; cursor:pointer; transition:0.3s; }
+.quiz-card button:hover { background:#0284c7; }
 
-    /* ===== Container central ===== */
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 30px;
-        padding: 40px;
-        flex-wrap: wrap;
-    }
+/* Download Cards */
+.download-card { background: linear-gradient(135deg,#064e3b,#065f46); color:#fff; }
+.download-card a { display:block; margin-top:10px; padding:10px 15px; border-radius:8px; background:#3b82f6; color:#fff; transition:0.3s; }
+.download-card a:hover { background:#2563eb; }
 
-    /* ===== Cards ===== */
-    .card {
-        border-radius:15px;
-        padding:25px;
-        width:320px;
-        text-align:center;
-        position:relative;
-        box-shadow:0 8px 25px rgba(0,0,0,0.5);
-        transition: transform 0.5s, box-shadow 0.5s;
-        background: rgba(0,0,0,0.7);
-    }
-    .card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
+/* Quiz Container */
+.quiz-container { display:none; margin-top:15px; }
+.options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; font-size:1em; }
+.options button:hover { background:#374151; }
+.correct { background:#15803d !important; }
+.wrong { background:#b91c1c !important; }
+.timer { margin:10px 0; font-weight:bold; color:#facc15; }
 
-    /* Quiz Cards */
-    .quiz-card { background: linear-gradient(135deg,#0f3d9b,#1e60d1); color:#fff; }
-    .quiz-card h3 { font-size:1.5em; margin-bottom:15px; text-shadow: 0 0 5px #0ff;}
-    .quiz-card button { padding:10px 15px; border:none; border-radius:8px; background:#0ea5e9; color:#fff; cursor:pointer; transition:0.3s; }
-    .quiz-card button:hover { background:#0284c7; }
+/* Score e reinício */
+#score { display:none; margin-top:10px; }
+.restart-btn { margin-top:10px; padding:10px 20px; border-radius:8px; background:#0ea5e9; color:#fff; border:none; cursor:pointer; transition:0.3s; }
+.restart-btn:hover { background:#0284c7; }
 
-    /* Download Cards */
-    .download-card { background: linear-gradient(135deg,#065f46,#0f766e); color:#fff; }
-    .download-card a { display:block; margin-top:10px; padding:10px 15px; border-radius:8px; background:#3b82f6; color:#fff; transition:0.3s; }
-    .download-card a:hover { background:#2563eb; }
+/* Footer */
+footer {
+    text-align:center;
+    padding:25px;
+    background: rgba(0,0,0,0.5);
+    color:#cbd5e1;
+    margin-top:40px;
+}
+footer a { color:#7fdbff; margin:0 10px; }
 
-    /* Quiz Container */
-    .quiz-container { display:none; margin-top:15px; }
-    .options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; font-size:1em; transition:0.3s;}
-    .options button:hover { background:#374151; }
-    .correct { background:#15803d !important; color:#fff !important;}
-    .wrong { background:#b91c1c !important; color:#fff !important;}
-    .timer { margin:10px 0; font-weight:bold; color:#facc15; }
-
-    /* Footer */
-    footer {
-        text-align:center;
-        padding:25px;
-        background: rgba(0,0,0,0.5);
-        color:#cbd5e1;
-        margin-top:40px;
-        animation: footerGlow 2s ease-in-out infinite alternate;
-    }
-    footer a { color:#7fdbff; margin:0 10px; }
-
-    @keyframes footerGlow {
-        0% {text-shadow: 0 0 5px #0ff;}
-        50% {text-shadow: 0 0 15px #0ff;}
-        100% {text-shadow: 0 0 5px #0ff;}
-    }
-
-    /* Responsivo */
-    @media (max-width:1000px) {
-        .container { flex-direction: column; align-items:center; }
-        .card { width:90%; }
-    }
+/* Responsivo */
+@media (max-width:1000px) {
+    .container { flex-direction: column; align-items:center; }
+    .card { width:90%; }
+}
+.quiz-thumbnail { width: 100%; border-radius:10px; margin-bottom:15px; }
 </style>
 </head>
 <body>
 
 <header>
     <h1>Daniela Leão da Silva</h1>
-    <p>Profissional de TI com mais de 10 anos | Pós em Análise de Sistemas | Infraestrutura, Hardware, Software, Cloud & Azure</p>
+    <p>Profissional com experiência em TI | Graduada em Redes | Pós em Análise de Sistemas | Docente e Infraestrutura | Cloud e Azure</p>
 </header>
 
 <div class="container">
@@ -117,15 +101,33 @@
     <!-- Quiz 1 -->
     <div class="card quiz-card">
         <h3>Assuntos Atuais</h3>
+        <img src="assets/quiz-thumbnail.jpg" alt="Quiz Thumbnail" class="quiz-thumbnail">
         <button onclick="startQuiz(1)">Responder</button>
-        <div id="quiz1" class="quiz-container"></div>
+        <div id="quiz1" class="quiz-container">
+            <p class="timer" id="timer1">30s</p>
+            <p id="question1"></p>
+            <div class="options" id="options1"></div>
+            <div id="score1">
+                <p id="result1"></p>
+                <button class="restart-btn" onclick="startQuiz(1)">Recomeçar</button>
+            </div>
+        </div>
     </div>
 
     <!-- Quiz 2 -->
     <div class="card quiz-card">
         <h3>Celular & Tecnologia</h3>
+        <img src="assets/quiz-thumbnail.jpg" alt="Quiz Thumbnail" class="quiz-thumbnail">
         <button onclick="startQuiz(2)">Responder</button>
-        <div id="quiz2" class="quiz-container"></div>
+        <div id="quiz2" class="quiz-container">
+            <p class="timer" id="timer2">30s</p>
+            <p id="question2"></p>
+            <div class="options" id="options2"></div>
+            <div id="score2">
+                <p id="result2"></p>
+                <button class="restart-btn" onclick="startQuiz(2)">Recomeçar</button>
+            </div>
+        </div>
     </div>
 
     <!-- Currículo -->
@@ -139,51 +141,112 @@
 </div>
 
 <footer>
-    <p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> |
-    <a href="https://github.com/danielaleao83-glitch/DanielaPortifolio" target="_blank">GitHub</a> |
-    <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
+<p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> | <a href="https://github.com/danielaleao83-glitch/DanielaPortifolio" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
 </footer>
 
 <script>
-// ===== Perguntas para os dois quizzes (mesmas perguntas) =====
-const quiz1Questions = [
-    {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
-    {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
-    {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
-    {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
-    {q:"Qual empresa fabrica o sistema Android?", o:["Google","Apple","Microsoft","Samsung"], a:0},
-    {q:"O que significa CPU?", o:["Central Processing Unit","Computer Personal Unit","Central Phone Utility","Control Program Usage"], a:0},
-    {q:"O que é RAM?", o:["Memória de acesso aleatório","Processador","Sistema Operacional","Armazenamento"], a:0},
-    {q:"Qual é o sistema operacional do iPhone?", o:["iOS","Android","Windows Phone","Symbian"], a:0},
-    {q:"O que é phishing?", o:["Ataque virtual de roubo de dados","Antivírus","Firewall","Backup"], a:0},
-    {q:"O que é um SSD?", o:["Disco de estado sólido","Servidor seguro de dados","Software de segurança digital","Sistema simples de disco"], a:0},
-    {q:"O que é Cloud Computing?", o:["Computação em nuvem","Computador local","Rede interna","Banco de dados"], a:0},
-    {q:"O que significa IoT?", o:["Internet das Coisas","Interface on Time","Input Output Technology","Internet Online Tool"], a:0},
-    {q:"O que é um firewall?", o:["Proteção de rede","Servidor","Antivírus","Programa de edição"], a:0},
-    {q:"O que é backup?", o:["Cópia de segurança","Desinstalação","Monitoramento","Formatação"], a:0},
-    {q:"Bluetooth serve para:", o:["Conexão sem fio de curto alcance","Internet via satélite","Redes cabeadas","Energia elétrica"], a:0},
-    {q:"Qual navegador é da Microsoft?", o:["Edge","Chrome","Firefox","Safari"], a:0},
-    {q:"O que significa URL?", o:["Uniform Resource Locator","Universal Router Link","User Remote Login","Ultra Rapid Language"], a:0},
-    {q:"Um byte possui quantos bits?", o:["8","4","16","32"], a:0},
-    {q:"Linguagem para Android nativo?", o:["Java","C#","Python","Swift"], a:0},
-    {q:"Qual a função do GPS no celular?", o:["Localização","Conexão Wi-Fi","Bateria","Memória"], a:0}
+// ===== Perguntas (mesmas para os dois quizzes) =====
+const quizData = [
+  {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
+  {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
+  {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
+  {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
+  {q:"A crise energética de 2022 foi causada por?", o:["Conflito Rússia-Ucrânia","Pandemia","Greve global","Mudança climática"], a:0},
+  {q:"Qual país saiu da União Europeia em 2020?", o:["Reino Unido","França","Alemanha","Itália"], a:0},
+  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","Bolsonaro","Dilma","Ciro"], a:0},
+  {q:"Qual empresa comprou o Twitter em 2022?", o:["Elon Musk","Meta","Microsoft","Apple"], a:0},
+  {q:"Qual país é o maior emissor de CO2 do mundo?", o:["China","EUA","Índia","Rússia"], a:0},
+  {q:"Qual evento esportivo será em 2028?", o:["Olimpíadas de Los Angeles","Copa no Brasil","Eurocopa","Copa da África"], a:0},
+  {q:"Qual foi o tema da conferência COP27?", o:["Mudanças climáticas","Energia nuclear","Computação","Medicina"], a:0},
+  {q:"Quem venceu o Oscar de Melhor Filme 2024?", o:["Nomadland","Everything Everywhere","Oppenheimer","Avatar 2"], a:2},
+  {q:"Qual foi a descoberta científica de 2023?", o:["Fusão nuclear","Inteligência Artificial","Robótica avançada","Exploração espacial"], a:0},
+  {q:"Quem ganhou a Copa Libertadores 2025?", o:["Flamengo","Palmeiras","River Plate","Boca Juniors"], a:1},
+  {q:"Qual a capital da Austrália?", o:["Sydney","Melbourne","Canberra","Perth"], a:2},
+  {q:"Quem é o CEO da Tesla em 2025?", o:["Elon Musk","Jeff Bezos","Tim Cook","Sundar Pichai"], a:0},
+  {q:"Qual filme da Marvel estreou em 2025?", o:["Guardians 4","Avengers 6","Black Panther 2","Shang-Chi 2"], a:1},
+  {q:"Qual a maior rede social em 2025?", o:["Facebook","TikTok","Instagram","Twitter"], a:2},
+  {q:"Qual é a nova moeda digital do Brasil?", o:["BRL Digital","RealCoin","CryptoBR","e-BRL"], a:3},
+  {q:"Qual país sediará os Jogos Olímpicos de 2032?", o:["Japão","Austrália","Estados Unidos","China"], a:1}
 ];
 
-const quiz2Questions = JSON.parse(JSON.stringify(quiz1Questions)); // mesma lista para quiz2
-
-let currentQuiz=null, currentQuestion=0, timer=null, timeLeft=30, userAnswers=[];
-
-const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
-const wrongSound = new Audio('https://actions.google.com/sounds/v1/cartoon/boing.ogg');
-
+// ===== Funções de quiz =====
 function startQuiz(quizNumber){
-    currentQuiz=quizNumber;
-    currentQuestion=0;
-    userAnswers=[];
-    document.getElementById(`quiz${quizNumber}`).style.display='block';
-    showQuestion();
-}
+    const questionEl = document.getElementById('question'+quizNumber);
+    const optionsEl = document.getElementById('options'+quizNumber);
+    const scoreEl = document.getElementById('score'+quizNumber);
+    const resultEl = document.getElementById('result'+quizNumber);
+    let current = 0;
+    let score = 0;
+    let timer = 30;
+    let timerInterval;
 
-function showQuestion(){
-    const quizData = currentQuiz===1?quiz1Questions:quiz2Questions;
-    const container = document.getElementById(`
+    document.getElementById('quiz'+quizNumber).style.display = 'block';
+    scoreEl.style.display = 'none';
+    questionEl.textContent = quizData[current].q;
+
+    function showOptions(){
+        optionsEl.innerHTML = '';
+        quizData[current].o.forEach((option,index)=>{
+            const btn = document.createElement('button');
+            btn.textContent = option;
+            btn.classList.add('option');
+            btn.onclick = ()=>selectOption(index, btn);
+            optionsEl.appendChild(btn);
+        });
+    }
+
+    function selectOption(index, btn){
+        clearInterval(timerInterval);
+        const correctIndex = quizData[current].a;
+        if(index===correctIndex){
+            btn.classList.add('correct');
+            score++;
+        }else{
+            btn.classList.add('wrong');
+            btn.textContent = "❌ "+btn.textContent;
+        }
+        setTimeout(nextQuestion,1000);
+    }
+
+    function nextQuestion(){
+        current++;
+        if(current<quizData.length){
+            questionEl.textContent = quizData[current].q;
+            timer=30;
+            startTimer();
+            showOptions();
+        }else finishQuiz();
+    }
+
+    function startTimer(){
+        timer=30;
+        document.getElementById('timer'+quizNumber).textContent = timer+'s';
+        timerInterval = setInterval(()=>{
+            timer--;
+            document.getElementById('timer'+quizNumber).textContent = timer+'s';
+            if(timer<=0){
+                clearInterval(timerInterval);
+                current++;
+                if(current<quizData.length){
+                    questionEl.textContent = quizData[current].q;
+                    showOptions();
+                    startTimer();
+                }else finishQuiz();
+            }
+        },1000);
+    }
+
+    function finishQuiz(){
+        optionsEl.innerHTML = '';
+        questionEl.textContent = "Fim do Quiz!";
+        scoreEl.style.display = 'block';
+        resultEl.textContent = `Você acertou ${score} de ${quizData.length} perguntas`;
+    }
+
+    showOptions();
+    startTimer();
+}
+</script>
+
+</body>
+</html>
