@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -120,19 +120,22 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 
 /* Download Cards futurista */
 .download-card { 
-    background: linear-gradient(135deg,#064e3b,#065f46);
+    background: linear-gradient(145deg, #0a1f2c, #1e3a5f);
     color:#fff; 
-    box-shadow: 0 0 15px rgba(59,130,246,0.5);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 115, 230, 0.4);
 }
 .download-card a { 
     display:block; 
-    margin-top:10px; 
+    margin:10px 0; 
     padding:10px 15px; 
     border-radius:8px; 
     background: linear-gradient(145deg, #102a44, #1c3f72);
     color:#fff; 
-    cursor:pointer;
+    text-align:center;
     font-weight:bold;
+    cursor:pointer;
     box-shadow: 0 0 5px #0ea5e9, 2px 2px 6px rgba(0,0,0,0.6),
                 inset -2px -2px 4px rgba(255,255,255,0.05),
                 inset 2px 2px 4px rgba(0,0,0,0.5);
@@ -150,9 +153,6 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 
 /* Timer */
 .timer { margin:10px 0; font-weight:bold; color:#facc15; text-shadow: 0 0 5px #facc15; }
-
-/* Score e reinício */
-#score { display:none; margin-top:10px; }
 
 /* Footer */
 footer {
@@ -176,7 +176,7 @@ footer a { color:#7fdbff; margin:0 10px; }
 
 <header>
     <h1>Daniela Leão da Silva</h1>
-    <p>Profissional com experiência em TI | Graduada em Redes | Pós em Análise de Sistemas | Docente em Tecnologia | Infraestrutura | Cloud e Azure</p>
+    <p> Gratualizalão em Rede de Computadores | Pós em Analise de Sistemas | Docente em Tecnologia | Infraestrutura | Cloud e Azure</p>
 </header>
 
 <div class="container">
@@ -238,4 +238,93 @@ const quizData = [
   {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
   {q:"A crise energética de 2022 foi causada por?", o:["Conflito Rússia-Ucrânia","Pandemia","Greve global","Mudança climática"], a:0},
   {q:"Qual país saiu da União Europeia em 2020?", o:["Reino Unido","França","Alemanha","Itália"], a:0},
-  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","
+  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","Bolsonaro","Dilma","Ciro"], a:0},
+  {q:"Qual empresa comprou o Twitter em 2022?", o:["Elon Musk","Meta","Microsoft","Apple"], a:0},
+  {q:"Qual país é o maior emissor de CO2 do mundo?", o:["China","EUA","Índia","Rússia"], a:0},
+  {q:"Qual evento esportivo será em 2028?", o:["Olimpíadas de Los Angeles","Copa no Brasil","Eurocopa","Copa da África"], a:0}
+];
+
+// ===== Funções de quiz =====
+function startQuiz(quizNumber){
+    const questionEl = document.getElementById('question'+quizNumber);
+    const optionsEl = document.getElementById('options'+quizNumber);
+    const scoreEl = document.getElementById('score'+quizNumber);
+    const resultEl = document.getElementById('result'+quizNumber);
+    let current = 0;
+    let score = 0;
+    let timer = 30;
+    let timerInterval;
+
+    document.getElementById('quiz'+quizNumber).style.display = 'block';
+    scoreEl.style.display = 'none';
+    questionEl.textContent = quizData[current].q;
+
+    function showOptions(){
+        optionsEl.innerHTML = '';
+        quizData.forEach((q,index)=>{
+            if(index===current){
+                quizData[current].o.forEach((option,optIndex)=>{
+                    const btn = document.createElement('button');
+                    btn.textContent = option;
+                    btn.classList.add('option');
+                    btn.onclick = ()=>selectOption(optIndex, btn);
+                    optionsEl.appendChild(btn);
+                });
+            }
+        });
+    }
+
+    function selectOption(index, btn){
+        clearInterval(timerInterval);
+        const correctIndex = quizData[current].a;
+        if(index===correctIndex){
+            btn.classList.add('correct');
+            score++;
+        }else{
+            btn.classList.add('wrong');
+            btn.textContent = "❌ "+btn.textContent;
+        }
+        setTimeout(nextQuestion,1000);
+    }
+
+    function nextQuestion(){
+        current++;
+        if(current<quizData.length){
+            questionEl.textContent = quizData[current].q;
+            showOptions();
+            startTimer();
+        }else finishQuiz();
+    }
+
+    function startTimer(){
+        timer=30;
+        document.getElementById('timer'+quizNumber).textContent = timer+'s';
+        timerInterval = setInterval(()=>{
+            timer--;
+            document.getElementById('timer'+quizNumber).textContent = timer+'s';
+            if(timer<=0){
+                clearInterval(timerInterval);
+                current++;
+                if(current<quizData.length){
+                    questionEl.textContent = quizData[current].q;
+                    showOptions();
+                    startTimer();
+                }else finishQuiz();
+            }
+        },1000);
+    }
+
+    function finishQuiz(){
+        optionsEl.innerHTML = '';
+        questionEl.textContent = "Fim do Quiz!";
+        scoreEl.style.display = 'block';
+        resultEl.textContent = `Você acertou ${score} de ${quizData.length} perguntas`;
+    }
+
+    showOptions();
+    startTimer();
+}
+</script>
+
+</body>
+</html>
