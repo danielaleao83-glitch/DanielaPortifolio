@@ -19,9 +19,14 @@ header {
     text-align: center;
     padding: 50px 20px;
     background: rgba(0,0,0,0.5);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
-header h1 { color: #ffffff; font-size: 2.5em; margin:0; }
+header h1 { 
+    color: #ffffff; 
+    font-size: 2.5em; 
+    margin:0; 
+    text-shadow: 0 0 10px #7fbfff, 0 0 20px #4a90e2;
+}
 header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 
 /* ===== Container central ===== */
@@ -47,29 +52,97 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 }
 .card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
 
-/* Quiz Cards */
-.quiz-card { background: linear-gradient(135deg,#14532d,#166534); color:#fff; }
-.quiz-card h3 { font-size:1.5em; margin-bottom:15px; }
-.quiz-card button { padding:10px 15px; border:none; border-radius:8px; background:#0ea5e9; color:#fff; cursor:pointer; transition:0.3s; }
-.quiz-card button:hover { background:#0284c7; }
+/* ===== Quiz Cards Futuristas ===== */
+.quiz-card {
+    background: linear-gradient(145deg, #0a1f2c, #1e3a5f);
+    color: #ffffff;
+    border: 2px solid #0d284f;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 115, 230, 0.4), 4px 4px 12px rgba(0,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.quiz-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.6), 6px 6px 18px rgba(0,0,0,0.8);
+}
+
+/* Título dos quizzes com neon/metálico pulsante */
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 5px #7fbfff, 0 0 10px #4a90e2, 0 0 15px #1e3f72; }
+    50% { text-shadow: 0 0 10px #7fbfff, 0 0 20px #4a90e2, 0 0 25px #1e3f72; }
+}
+.quiz-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #c0d6ff;
+    letter-spacing: 1px;
+    font-weight: bold;
+    animation: glow 2s infinite;
+}
+
+/* Botões futuristas */
+.quiz-card button, 
+.options button, 
+.restart-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #102a44, #1c3f72);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 5px #0ea5e9, 2px 2px 6px rgba(0,0,0,0.6),
+                inset -2px -2px 4px rgba(255,255,255,0.05),
+                inset 2px 2px 4px rgba(0,0,0,0.5);
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+.quiz-card button:hover, 
+.options button:hover, 
+.restart-btn:hover {
+    background: linear-gradient(145deg, #1a365d, #2a4f8a);
+    transform: scale(1.07);
+    box-shadow: 0 0 15px #0ea5e9, 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+/* Botões de resposta corretos e errados */
+.correct {
+    background: #1e8449 !important;
+    color: #fff !important;
+    box-shadow: 0 0 8px #16a34a;
+}
+.wrong {
+    background: #b02a37 !important;
+    color: #fff !important;
+    box-shadow: 0 0 8px #f43f5e;
+}
 
 /* Download Cards */
-.download-card { background: linear-gradient(135deg,#064e3b,#065f46); color:#fff; }
-.download-card a { display:block; margin-top:10px; padding:10px 15px; border-radius:8px; background:#3b82f6; color:#fff; transition:0.3s; }
-.download-card a:hover { background:#2563eb; }
+.download-card { 
+    background: linear-gradient(135deg,#064e3b,#065f46);
+    color:#fff; 
+    box-shadow: 0 0 15px rgba(59,130,246,0.5);
+}
+.download-card a { 
+    display:block; margin-top:10px; padding:10px 15px; border-radius:8px; 
+    background:#3b82f6; color:#fff; transition:0.3s; 
+    box-shadow: 0 0 8px #3b82f6;
+}
+.download-card a:hover { 
+    background:#2563eb; 
+    box-shadow: 0 0 15px #3b82f6;
+}
 
 /* Quiz Container */
 .quiz-container { display:none; margin-top:15px; }
-.options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; font-size:1em; }
-.options button:hover { background:#374151; }
-.correct { background:#15803d !important; }
-.wrong { background:#b91c1c !important; }
-.timer { margin:10px 0; font-weight:bold; color:#facc15; }
+.options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; font-size:1em; }
+
+/* Timer */
+.timer { margin:10px 0; font-weight:bold; color:#facc15; text-shadow: 0 0 5px #facc15; }
 
 /* Score e reinício */
 #score { display:none; margin-top:10px; }
-.restart-btn { margin-top:10px; padding:10px 20px; border-radius:8px; background:#0ea5e9; color:#fff; border:none; cursor:pointer; transition:0.3s; }
-.restart-btn:hover { background:#0284c7; }
 
 /* Footer */
 footer {
@@ -93,7 +166,7 @@ footer a { color:#7fdbff; margin:0 10px; }
 
 <header>
     <h1>Daniela Leão da Silva</h1>
-    <p>Profissional com experiência em TI | Graduada em Redes | Pós em Análise de Sistemas | Docente e Infraestrutura | Cloud e Azure</p>
+    <p>Profissional com experiência em TI | Graduada em Redes | Pós em Análise de Sistemas | Docente em Tecnologia | Infraestrutura | Cloud e Azure</p>
 </header>
 
 <div class="container">
@@ -141,112 +214,13 @@ footer a { color:#7fdbff; margin:0 10px; }
 </div>
 
 <footer>
-<p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> | <a href="https://github.com/danielaleao83-glitch/DanielaPortifolio" target="_blank">GitHub</a> | <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
+<p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> | 
+<a href="https://github.com/danielaleao83-glitch/DanielaPortifolio" target="_blank">GitHub</a> | 
+<a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
 </footer>
 
 <script>
-// ===== Perguntas (mesmas para os dois quizzes) =====
+// ===== Perguntas =====
 const quizData = [
   {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
-  {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
-  {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
-  {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
-  {q:"A crise energética de 2022 foi causada por?", o:["Conflito Rússia-Ucrânia","Pandemia","Greve global","Mudança climática"], a:0},
-  {q:"Qual país saiu da União Europeia em 2020?", o:["Reino Unido","França","Alemanha","Itália"], a:0},
-  {q:"Quem é o atual presidente do Brasil (2025)?", o:["Lula","Bolsonaro","Dilma","Ciro"], a:0},
-  {q:"Qual empresa comprou o Twitter em 2022?", o:["Elon Musk","Meta","Microsoft","Apple"], a:0},
-  {q:"Qual país é o maior emissor de CO2 do mundo?", o:["China","EUA","Índia","Rússia"], a:0},
-  {q:"Qual evento esportivo será em 2028?", o:["Olimpíadas de Los Angeles","Copa no Brasil","Eurocopa","Copa da África"], a:0},
-  {q:"Qual foi o tema da conferência COP27?", o:["Mudanças climáticas","Energia nuclear","Computação","Medicina"], a:0},
-  {q:"Quem venceu o Oscar de Melhor Filme 2024?", o:["Nomadland","Everything Everywhere","Oppenheimer","Avatar 2"], a:2},
-  {q:"Qual foi a descoberta científica de 2023?", o:["Fusão nuclear","Inteligência Artificial","Robótica avançada","Exploração espacial"], a:0},
-  {q:"Quem ganhou a Copa Libertadores 2025?", o:["Flamengo","Palmeiras","River Plate","Boca Juniors"], a:1},
-  {q:"Qual a capital da Austrália?", o:["Sydney","Melbourne","Canberra","Perth"], a:2},
-  {q:"Quem é o CEO da Tesla em 2025?", o:["Elon Musk","Jeff Bezos","Tim Cook","Sundar Pichai"], a:0},
-  {q:"Qual filme da Marvel estreou em 2025?", o:["Guardians 4","Avengers 6","Black Panther 2","Shang-Chi 2"], a:1},
-  {q:"Qual a maior rede social em 2025?", o:["Facebook","TikTok","Instagram","Twitter"], a:2},
-  {q:"Qual é a nova moeda digital do Brasil?", o:["BRL Digital","RealCoin","CryptoBR","e-BRL"], a:3},
-  {q:"Qual país sediará os Jogos Olímpicos de 2032?", o:["Japão","Austrália","Estados Unidos","China"], a:1}
-];
-
-// ===== Funções de quiz =====
-function startQuiz(quizNumber){
-    const questionEl = document.getElementById('question'+quizNumber);
-    const optionsEl = document.getElementById('options'+quizNumber);
-    const scoreEl = document.getElementById('score'+quizNumber);
-    const resultEl = document.getElementById('result'+quizNumber);
-    let current = 0;
-    let score = 0;
-    let timer = 30;
-    let timerInterval;
-
-    document.getElementById('quiz'+quizNumber).style.display = 'block';
-    scoreEl.style.display = 'none';
-    questionEl.textContent = quizData[current].q;
-
-    function showOptions(){
-        optionsEl.innerHTML = '';
-        quizData[current].o.forEach((option,index)=>{
-            const btn = document.createElement('button');
-            btn.textContent = option;
-            btn.classList.add('option');
-            btn.onclick = ()=>selectOption(index, btn);
-            optionsEl.appendChild(btn);
-        });
-    }
-
-    function selectOption(index, btn){
-        clearInterval(timerInterval);
-        const correctIndex = quizData[current].a;
-        if(index===correctIndex){
-            btn.classList.add('correct');
-            score++;
-        }else{
-            btn.classList.add('wrong');
-            btn.textContent = "❌ "+btn.textContent;
-        }
-        setTimeout(nextQuestion,1000);
-    }
-
-    function nextQuestion(){
-        current++;
-        if(current<quizData.length){
-            questionEl.textContent = quizData[current].q;
-            timer=30;
-            startTimer();
-            showOptions();
-        }else finishQuiz();
-    }
-
-    function startTimer(){
-        timer=30;
-        document.getElementById('timer'+quizNumber).textContent = timer+'s';
-        timerInterval = setInterval(()=>{
-            timer--;
-            document.getElementById('timer'+quizNumber).textContent = timer+'s';
-            if(timer<=0){
-                clearInterval(timerInterval);
-                current++;
-                if(current<quizData.length){
-                    questionEl.textContent = quizData[current].q;
-                    showOptions();
-                    startTimer();
-                }else finishQuiz();
-            }
-        },1000);
-    }
-
-    function finishQuiz(){
-        optionsEl.innerHTML = '';
-        questionEl.textContent = "Fim do Quiz!";
-        scoreEl.style.display = 'block';
-        resultEl.textContent = `Você acertou ${score} de ${quizData.length} perguntas`;
-    }
-
-    showOptions();
-    startTimer();
-}
-</script>
-
-</body>
-</html>
+  {q:"Quem é o atual secretário-geral da ONU?", o:["Ant
