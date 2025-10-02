@@ -5,93 +5,185 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniela Leão - Portfólio</title>
 <style>
-/* Fontes clássicas elegantes */
-body, button, a, p { font-family: 'Georgia', serif; margin:0; padding:0; box-sizing:border-box; }
-body { background: #0a1b2e; color: #ffffff; overflow:hidden; }
+    /* ===== Geral ===== */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg,#0b1a2c,#1a2a44);
+        color: #e0e7ff;
+        animation: bgAnimation 15s ease-in-out infinite alternate;
+    }
 
-/* Header */
-header { background: linear-gradient(135deg,#0d1b2a,#1e293b); color:#fff; padding:40px 20px; text-align:center; }
-header h1 { font-size:3em; margin-bottom:10px; }
-header p { font-size:1.3em; color:#7ec8e3; }
+    @keyframes bgAnimation {
+        0% {background-position:0% 50%;}
+        50% {background-position:100% 50%;}
+        100% {background-position:0% 50%;}
+    }
 
-/* Container central */
-.container { display:flex; justify-content:center; align-items:flex-start; gap:30px; padding:40px; flex-wrap:wrap; }
+    a { text-decoration: none; }
 
-/* Cards */
-.card { border-radius:15px; padding:25px; width:320px; text-align:center; position:relative; box-shadow:0 8px 25px rgba(0,0,0,0.5); transition: transform 0.5s, box-shadow 0.5s; }
-.card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
+    /* ===== Header ===== */
+    header {
+        text-align: center;
+        padding: 50px 20px;
+        background: rgba(0,0,0,0.6);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        animation: headerGlow 2s ease-in-out infinite alternate;
+    }
+    header h1 { color: #ffffff; font-size: 2.5em; margin:0; }
+    header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 
-/* Projeto */
-.quiz-card { background: linear-gradient(135deg,#14532d,#166534); color:#ffffff; }
-.quiz-card h3 { font-size:1.5em; margin-bottom:15px; }
+    @keyframes headerGlow {
+        0% {text-shadow: 0 0 10px #00f, 0 0 20px #00f;}
+        50% {text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;}
+        100% {text-shadow: 0 0 10px #00f, 0 0 20px #00f;}
+    }
 
-/* Download */
-.download-card { background: linear-gradient(135deg,#1e293b,#0f172a); }
-.download-card h3 { font-size:1.5em; margin-bottom:15px; }
+    /* ===== Container central ===== */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 30px;
+        padding: 40px;
+        flex-wrap: wrap;
+    }
 
-/* Botões */
-button, .btn { font-family: 'Georgia', serif; font-size:1em; padding:12px 25px; border-radius:10px; border:none; cursor:pointer; transition: all 0.3s ease; }
-button:hover, .btn:hover { transform: translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.6); }
-.start-btn { background:#15803d; color:white; font-size:1.1em; text-decoration:none; display:inline-block; margin-top:10px; }
-.download-btn { background:#3b82f6; color:white; font-size:1.1em; margin-top:10px; display:inline-block; text-decoration:none; }
+    /* ===== Cards ===== */
+    .card {
+        border-radius:15px;
+        padding:25px;
+        width:320px;
+        text-align:center;
+        position:relative;
+        box-shadow:0 8px 25px rgba(0,0,0,0.5);
+        transition: transform 0.5s, box-shadow 0.5s;
+        background: rgba(0,0,0,0.7);
+    }
+    .card:hover { transform: translateY(-10px); box-shadow:0 12px 35px rgba(0,0,0,0.7); }
 
-/* Footer */
-footer { text-align:center; padding:25px; background:#0b1a2c; margin-top:30px; }
-footer a { text-decoration:none; font-weight:normal; transition: color 0.3s; }
-.email { color:#facc15; }
-.linkedin { color:#fbbf24; }
-.github { color:#ffffff; }
-footer a:hover { opacity:0.8; }
+    /* Quiz Cards */
+    .quiz-card { background: linear-gradient(135deg,#0f3d9b,#1e60d1); color:#fff; }
+    .quiz-card h3 { font-size:1.5em; margin-bottom:15px; text-shadow: 0 0 5px #0ff;}
+    .quiz-card button { padding:10px 15px; border:none; border-radius:8px; background:#0ea5e9; color:#fff; cursor:pointer; transition:0.3s; }
+    .quiz-card button:hover { background:#0284c7; }
+
+    /* Download Cards */
+    .download-card { background: linear-gradient(135deg,#065f46,#0f766e); color:#fff; }
+    .download-card a { display:block; margin-top:10px; padding:10px 15px; border-radius:8px; background:#3b82f6; color:#fff; transition:0.3s; }
+    .download-card a:hover { background:#2563eb; }
+
+    /* Quiz Container */
+    .quiz-container { display:none; margin-top:15px; }
+    .options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; background:#1e3a5f; color:white; font-size:1em; transition:0.3s;}
+    .options button:hover { background:#374151; }
+    .correct { background:#15803d !important; color:#fff !important;}
+    .wrong { background:#b91c1c !important; color:#fff !important;}
+    .timer { margin:10px 0; font-weight:bold; color:#facc15; }
+
+    /* Footer */
+    footer {
+        text-align:center;
+        padding:25px;
+        background: rgba(0,0,0,0.5);
+        color:#cbd5e1;
+        margin-top:40px;
+        animation: footerGlow 2s ease-in-out infinite alternate;
+    }
+    footer a { color:#7fdbff; margin:0 10px; }
+
+    @keyframes footerGlow {
+        0% {text-shadow: 0 0 5px #0ff;}
+        50% {text-shadow: 0 0 15px #0ff;}
+        100% {text-shadow: 0 0 5px #0ff;}
+    }
+
+    /* Responsivo */
+    @media (max-width:1000px) {
+        .container { flex-direction: column; align-items:center; }
+        .card { width:90%; }
+    }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Daniela Leão da Silva</h1>
-  <p>Profissional de TI | Infraestrutura | Docente em Tecnologia | Azure | Cloud Computing</p>
+    <h1>Daniela Leão da Silva</h1>
+    <p>Profissional de TI com mais de 10 anos | Pós em Análise de Sistemas | Infraestrutura, Hardware, Software, Cloud & Azure</p>
 </header>
 
 <div class="container">
 
-  <!-- Projeto 1 -->
-  <div class="card quiz-card">
-    <h3>Projeto 1</h3>
-    <p>Descrição breve do projeto 1.</p>
-    <a href="#" class="start-btn">Ver Projeto</a>
-  </div>
+    <!-- Quiz 1 -->
+    <div class="card quiz-card">
+        <h3>Assuntos Atuais</h3>
+        <button onclick="startQuiz(1)">Responder</button>
+        <div id="quiz1" class="quiz-container"></div>
+    </div>
 
-  <!-- Projeto 2 -->
-  <div class="card quiz-card">
-    <h3>Projeto 2</h3>
-    <p>Descrição breve do projeto 2.</p>
-    <a href="#" class="start-btn">Ver Projeto</a>
-  </div>
+    <!-- Quiz 2 -->
+    <div class="card quiz-card">
+        <h3>Celular & Tecnologia</h3>
+        <button onclick="startQuiz(2)">Responder</button>
+        <div id="quiz2" class="quiz-container"></div>
+    </div>
 
-  <!-- Novo Card do Quiz -->
-  <div class="card quiz-card">
-    <img src="assets/quiz-thumbnail.jpg" alt="Quiz Miniatura" style="width:200px; border-radius:10px;">
-    <h3>Quiz Interativo</h3>
-    <p>Teste seus conhecimentos em temas variados.</p>
-    <a href="quiz.html" class="start-btn">Abrir Quiz</a>
-  </div>
-
-  <!-- Download Currículo -->
-  <div class="card download-card">
-    <h3>Currículo Daniela</h3>
-    <p>Baixe ou visualize meu currículo.</p>
-    <a href="assets/Curriculo-Daniela-Leao.pdf" target="_blank" class="download-btn">Visualizar</a>
-    <a href="assets/Curriculo-Daniela-Leao.pdf" download class="download-btn">Baixar</a>
-  </div>
+    <!-- Currículo -->
+    <div class="card download-card">
+        <h3>Currículo Daniela</h3>
+        <p>Baixe ou visualize meu currículo profissional.</p>
+        <a href="assets/Curriculo-Daniela-Profissional.pdf" target="_blank">Visualizar</a>
+        <a href="assets/Curriculo-Daniela-Profissional.pdf" download>Baixar</a>
+    </div>
 
 </div>
 
 <footer>
-  <p>Contato:</p>
-  <p>Email: <a href="mailto:daniela.leao83@gmail.com" class="email">daniela.leao83@gmail.com</a></p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank" class="linkedin">Meu LinkedIn</a></p>
-  <p>GitHub: <a href="https://github.com/danielaleao83" target="_blank" class="github">Meu GitHub</a></p>
-  <p>&copy; 2025 Daniela Leão da Silva</p>
+    <p>📫 Contato: <a href="mailto:daniela.leao83@gmail.com">daniela.leao83@gmail.com</a> |
+    <a href="https://github.com/danielaleao83-glitch/DanielaPortifolio" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
 </footer>
 
-</body>
-</html>
+<script>
+// ===== Perguntas para os dois quizzes (mesmas perguntas) =====
+const quiz1Questions = [
+    {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
+    {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Joe Biden","Olaf Scholz"], a:0},
+    {q:"Qual moeda digital oficial foi lançada na China?", o:["e-CNY","Bitcoin","e-Euro","Digital Yen"], a:0},
+    {q:"O ChatGPT foi criado por qual empresa?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
+    {q:"Qual empresa fabrica o sistema Android?", o:["Google","Apple","Microsoft","Samsung"], a:0},
+    {q:"O que significa CPU?", o:["Central Processing Unit","Computer Personal Unit","Central Phone Utility","Control Program Usage"], a:0},
+    {q:"O que é RAM?", o:["Memória de acesso aleatório","Processador","Sistema Operacional","Armazenamento"], a:0},
+    {q:"Qual é o sistema operacional do iPhone?", o:["iOS","Android","Windows Phone","Symbian"], a:0},
+    {q:"O que é phishing?", o:["Ataque virtual de roubo de dados","Antivírus","Firewall","Backup"], a:0},
+    {q:"O que é um SSD?", o:["Disco de estado sólido","Servidor seguro de dados","Software de segurança digital","Sistema simples de disco"], a:0},
+    {q:"O que é Cloud Computing?", o:["Computação em nuvem","Computador local","Rede interna","Banco de dados"], a:0},
+    {q:"O que significa IoT?", o:["Internet das Coisas","Interface on Time","Input Output Technology","Internet Online Tool"], a:0},
+    {q:"O que é um firewall?", o:["Proteção de rede","Servidor","Antivírus","Programa de edição"], a:0},
+    {q:"O que é backup?", o:["Cópia de segurança","Desinstalação","Monitoramento","Formatação"], a:0},
+    {q:"Bluetooth serve para:", o:["Conexão sem fio de curto alcance","Internet via satélite","Redes cabeadas","Energia elétrica"], a:0},
+    {q:"Qual navegador é da Microsoft?", o:["Edge","Chrome","Firefox","Safari"], a:0},
+    {q:"O que significa URL?", o:["Uniform Resource Locator","Universal Router Link","User Remote Login","Ultra Rapid Language"], a:0},
+    {q:"Um byte possui quantos bits?", o:["8","4","16","32"], a:0},
+    {q:"Linguagem para Android nativo?", o:["Java","C#","Python","Swift"], a:0},
+    {q:"Qual a função do GPS no celular?", o:["Localização","Conexão Wi-Fi","Bateria","Memória"], a:0}
+];
+
+const quiz2Questions = JSON.parse(JSON.stringify(quiz1Questions)); // mesma lista para quiz2
+
+let currentQuiz=null, currentQuestion=0, timer=null, timeLeft=30, userAnswers=[];
+
+const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+const wrongSound = new Audio('https://actions.google.com/sounds/v1/cartoon/boing.ogg');
+
+function startQuiz(quizNumber){
+    currentQuiz=quizNumber;
+    currentQuestion=0;
+    userAnswers=[];
+    document.getElementById(`quiz${quizNumber}`).style.display='block';
+    showQuestion();
+}
+
+function showQuestion(){
+    const quizData = currentQuiz===1?quiz1Questions:quiz2Questions;
+    const container = document.getElementById(`
