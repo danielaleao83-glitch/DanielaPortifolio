@@ -153,6 +153,34 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 /* Score e reinício */
 #score { display:none; margin-top:10px; }
 
+/* ===== Currículo futurista ===== */
+.curriculum-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+.btn-curriculo {
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1em;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all;
+    box-shadow: 0 0 8px #0ea5e9, 0 4px 15px rgba(0,0,0,0.4);
+    text-decoration: none;
+}
+.view-btn { background: linear-gradient(135deg, #1c3f72, #0ea5e9); }
+.download-btn { background: linear-gradient(135deg, #0ea5e9, #1c3f72); }
+.btn-curriculo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #0ea5e9, 0 6px 25px rgba(0,0,0,0.6);
+}
+
 /* Footer */
 footer {
     text-align:center;
@@ -188,12 +216,10 @@ footer a { color:#7fdbff; margin:0 10px; }
     <!-- Quiz 1 -->
     <div class="card quiz-card">
         <h3>Assuntos Atuais</h3>
-        <img src="assets/quiz-thumbnail.jpg" alt=" Assuntos Atuais" class="quiz-thumbnail">
+        <img src="assets/quiz-thumbnail.jpg" alt="Teste seu Conhecimento" class="quiz-thumbnail">
         <button onclick="startQuiz(1)">Responder</button>
         <div id="quiz1" class="quiz-container">
-            <div class="timer-bar-container">
-                <div class="timer-bar" id="timerBar1"></div>
-            </div>
+            <div class="timer-bar-container"><div class="timer-bar" id="timerBar1"></div></div>
             <p class="timer" id="timer1">20s</p>
             <p id="question1"></p>
             <div class="options" id="options1"></div>
@@ -204,12 +230,10 @@ footer a { color:#7fdbff; margin:0 10px; }
     <!-- Quiz 2 -->
     <div class="card quiz-card">
         <h3>Celular & Tecnologia</h3>
-        <img src="assets/quiz-thumbnail.jpg" alt=" Celular e Tecnologia" class="quiz-thumbnail">
+        <img src="assets/quiz-thumbnail.jpg" alt="Teste seu Conhecimento" class="quiz-thumbnail">
         <button onclick="startQuiz(2)">Responder</button>
         <div id="quiz2" class="quiz-container">
-            <div class="timer-bar-container">
-                <div class="timer-bar" id="timerBar2"></div>
-            </div>
+            <div class="timer-bar-container"><div class="timer-bar" id="timerBar2"></div></div>
             <p class="timer" id="timer2">30s</p>
             <p id="question2"></p>
             <div class="options" id="options2"></div>
@@ -219,10 +243,12 @@ footer a { color:#7fdbff; margin:0 10px; }
 
     <!-- Currículo -->
     <div class="card quiz-card">
-        <h3>Currículo </h3>
-        <p>Baixe ou visualizar.</p>
-        <a href="assets/Curriculo-Daniela-Profissional.pdf" target="_blank">Visualizar</a>
-        <a href="assets/Curriculo-Daniela-Profissional.pdf" download>Baixar</a>
+        <h3>Currículo Daniela</h3>
+        <p>Doenload ou Visualizar.</p>
+        <div class="curriculum-buttons">
+            <a href="assets/Curriculo-Daniela-Profissional.pdf" target="_blank" class="btn-curriculo view-btn">Visualizar</a>
+            <a href="assets/Curriculo-Daniela-Profissional.pdf" download class="btn-curriculo download-btn">Baixar</a>
+        </div>
     </div>
 
 </div>
@@ -279,8 +305,7 @@ let timerInterval;
 function startQuiz(quizNumber){
     current = 0;
     score = 0;
-    const quizEl = document.getElementById('quiz'+quizNumber);
-    quizEl.style.display='block';
+    document.getElementById('quiz'+quizNumber).style.display='block';
     showQuestion(quizNumber);
 }
 
@@ -294,9 +319,8 @@ function showQuestion(quizNumber){
     const questionEl = document.getElementById('question'+quizNumber);
     const optionsEl = document.getElementById('options'+quizNumber);
     const scoreEl = document.getElementById('score'+quizNumber);
-    const timerBar = document.getElementById('timerBar'+quizNumber);
 
-    optionsEl.innerHTML = '';
+    optionsEl.innerHTML='';
     questionEl.textContent = data[current].q;
     scoreEl.style.display = 'none';
 
@@ -306,9 +330,6 @@ function showQuestion(quizNumber){
         btn.onclick = () => selectOption(index, quizNumber);
         optionsEl.appendChild(btn);
     });
-
-    timerBar.style.width = '100%';
-    timerBar.classList.remove('alert');
 
     startTimer(quizNumber);
 }
@@ -320,11 +341,13 @@ function selectOption(index, quizNumber){
 
     if(index === data[current].a){
         score++;
-        optionsEl[index].classList.add("correct");
+        optionsEl[index].classList.add('correct');
     } else {
-        if(index >= 0) optionsEl[index].classList.add("wrong");
-        optionsEl[data[current].a].classList.add("correct");
+        optionsEl[index].classList.add('wrong');
+        optionsEl[data[current].a].classList.add('correct');
     }
+
+    Array.from(optionsEl).forEach(btn => btn.disabled = true);
 
     setTimeout(()=>{
         current++;
@@ -332,45 +355,36 @@ function selectOption(index, quizNumber){
     }, 1000);
 }
 
+function finishQuiz(quizNumber){
+    const scoreEl = document.getElementById('score'+quizNumber);
+    const optionsEl = document.getElementById('options'+quizNumber);
+    scoreEl.innerHTML = `Você acertou ${score} de ${quizData[quizNumber].length} perguntas. <button class="restart-btn" onclick="startQuiz(${quizNumber})">Recomeçar</button>`;
+    scoreEl.style.display = 'block';
+    optionsEl.innerHTML = '';
+    document.getElementById('question'+quizNumber).textContent = "Quiz finalizado!";
+    document.getElementById('timer'+quizNumber).textContent = "";
+    document.getElementById('timerBar'+quizNumber).style.width = "0%";
+}
+
 function startTimer(quizNumber){
+    let time = quizNumber===1?20:30;
     const timerEl = document.getElementById('timer'+quizNumber);
-    const timerBar = document.getElementById('timerBar'+quizNumber);
-    let timerVal = (quizNumber === 1 ? 20 : 30);
-    timerEl.textContent = timerVal+'s';
+    const timerBarEl = document.getElementById('timerBar'+quizNumber);
+    timerBarEl.style.width = "100%";
+    timerBarEl.classList.remove('alert');
+
+    timerEl.textContent = time + "s";
 
     timerInterval = setInterval(()=>{
-        timerVal--;
-        timerEl.textContent = timerVal+'s';
-        timerBar.style.width = (timerVal / (quizNumber===1?20:30)*100) + '%';
-        if(timerVal <= 5){
-            timerBar.classList.add('alert');
-        }
-        if(timerVal <= 0){
+        time--;
+        timerEl.textContent = time + "s";
+        timerBarEl.style.width = (time*100/(quizNumber===1?20:30)) + "%";
+        if(time <= 5) timerBarEl.classList.add('alert');
+        if(time<=0) {
             clearInterval(timerInterval);
             selectOption(-1, quizNumber);
         }
-    }, 1000);
-}
-
-function finishQuiz(quizNumber){
-    clearInterval(timerInterval);
-    const data = quizData[quizNumber];
-    const questionEl = document.getElementById('question'+quizNumber);
-    const optionsEl = document.getElementById('options'+quizNumber);
-    const scoreEl = document.getElementById('score'+quizNumber);
-    const timerBar = document.getElementById('timerBar'+quizNumber);
-
-    optionsEl.innerHTML = '';
-    questionEl.textContent = "Fim do Quiz!";
-    timerBar.style.width = '0%';
-    scoreEl.style.display='block';
-
-    let message = score/data.length >= 0.7 ? 'Parabéns! Você mandou muito bem!' : 'Não desista, tente novamente!';
-    scoreEl.innerHTML = `
-        <p>Você acertou ${score} de ${data.length} perguntas</p>
-        <p>${message}</p>
-        <button class="restart-btn" onclick="startQuiz(${quizNumber})">Recomeçar</button>
-    `;
+    },1000);
 }
 </script>
 
