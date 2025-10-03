@@ -161,13 +161,10 @@ footer a { color:#7fdbff; margin:0 10px; }
         <img src="assets/quiz-thumbnail.jpg" alt="" class="quiz-thumbnail">
         <button onclick="startQuiz(1)">Responder</button>
         <div id="quiz1" class="quiz-container">
-            <p class="timer" id="timer1">30s</p>
+            <p class="timer" id="timer1">20s</p>
             <p id="question1"></p>
             <div class="options" id="options1"></div>
-            <div id="score1">
-                <p id="result1"></p>
-                <button class="restart-btn" onclick="startQuiz(1)">Recomeçar</button>
-            </div>
+            <div id="score1"></div>
         </div>
     </div>
 
@@ -180,10 +177,7 @@ footer a { color:#7fdbff; margin:0 10px; }
             <p class="timer" id="timer2">30s</p>
             <p id="question2"></p>
             <div class="options" id="options2"></div>
-            <div id="score2">
-                <p id="result2"></p>
-                <button class="restart-btn" onclick="startQuiz(2)">Recomeçar</button>
-            </div>
+            <div id="score2"></div>
         </div>
     </div>
 
@@ -203,16 +197,49 @@ footer a { color:#7fdbff; margin:0 10px; }
 <a href="https://www.linkedin.com/in/daniela-leão-561466a1" target="_blank">LinkedIn</a></p>
 </footer>
 
+<!-- ===== Script dos Quizzes ===== -->
 <script>
-// ===== Perguntas de exemplo =====
-const quizData = [
-  {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
-  {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Kofi Annan","Boutros Boutros-Ghali"], a:0}
-];
+// ===== Perguntas =====
+const quizData = {
+  1: [ // Quiz 1 - Atualidades
+    {q:"Qual país sediará a Copa do Mundo de 2026?", o:["EUA, Canadá e México","Brasil","Inglaterra","Japão"], a:0},
+    {q:"Quem é o atual secretário-geral da ONU?", o:["António Guterres","Ban Ki-moon","Kofi Annan","Boutros Boutros-Ghali"], a:0},
+    {q:"Qual cidade vai sediar as Olimpíadas de 2028?", o:["Los Angeles","Paris","Roma","Tóquio"], a:0},
+    {q:"Qual país recentemente entrou para os BRICS?", o:["Egito","Chile","Portugal","Canadá"], a:0},
+    {q:"Qual foi a primeira vacina contra a COVID-19 aprovada no Brasil?", o:["CoronaVac","Pfizer","AstraZeneca","Moderna"], a:0},
+    {q:"Quem venceu a eleição presidencial no Brasil em 2022?", o:["Luiz Inácio Lula da Silva","Jair Bolsonaro","Ciro Gomes","Simone Tebet"], a:0},
+    {q:"Qual empresa lançou o ChatGPT?", o:["OpenAI","Google","Microsoft","Amazon"], a:0},
+    {q:"Qual país é o maior produtor de petróleo do mundo atualmente?", o:["EUA","Arábia Saudita","Rússia","Irã"], a:1},
+    {q:"Qual o nome do bilionário dono da SpaceX?", o:["Elon Musk","Jeff Bezos","Bill Gates","Mark Zuckerberg"], a:0},
+    {q:"Onde ocorreu a COP28 em 2023?", o:["Dubai","Nova York","Glasgow","Madrid"], a:0}
+  ],
+
+  2: [ // Quiz 2 - Celular & Tecnologia
+    {q:"Qual empresa desenvolveu o sistema Android?", o:["Google","Apple","Microsoft","Samsung"], a:0},
+    {q:"Em que ano o primeiro iPhone foi lançado?", o:["2005","2007","2009","2010"], a:1},
+    {q:"Qual é o sistema operacional dos iPhones?", o:["iOS","Android","Windows Phone","HarmonyOS"], a:0},
+    {q:"Qual empresa fabrica os celulares Galaxy?", o:["Samsung","LG","Sony","Motorola"], a:0},
+    {q:"Qual desses NÃO é um assistente virtual?", o:["Siri","Cortana","Alexa","Redmi"], a:3},
+    {q:"Qual foi o primeiro celular com conexão 5G vendido no Brasil?", o:["Motorola Edge","iPhone 12","Samsung S20","Xiaomi Mi 10"], a:0},
+    {q:"O que significa a sigla 'RAM'?", o:["Random Access Memory","Read Access Memory","Rapid Active Mode","Run Access Module"], a:0},
+    {q:"Qual é a maior loja de aplicativos para Android?", o:["Google Play","App Store","Galaxy Store","Huawei AppGallery"], a:0},
+    {q:"Qual celular popularizou o reconhecimento facial em 2017?", o:["iPhone X","Samsung S9","Motorola Z","Huawei P20"], a:0},
+    {q:"Qual empresa comprou a Nokia em 2014?", o:["Microsoft","Google","Samsung","Sony"], a:0},
+    {q:"O que significa a sigla 'IMEI'?", o:["Identidade Internacional de Equipamento Móvel","Internet Mobile Exchange Identifier","Internal Mobile Electronic ID","Identificação Modular Externa Inteligente"], a:0},
+    {q:"Qual dessas marcas é chinesa?", o:["Xiaomi","Apple","Nokia","Sony"], a:0},
+    {q:"Em que ano foi lançado o WhatsApp?", o:["2009","2011","2013","2007"], a:0},
+    {q:"Qual rede social pertence ao grupo Meta?", o:["Instagram","TikTok","Twitter","Snapchat"], a:0},
+    {q:"O que significa 'Cloud Computing'?", o:["Computação em Nuvem","Computação Rápida","Computador Pessoal","Rede Física"], a:0},
+    {q:"Qual processador é usado em grande parte dos smartphones Android?", o:["Snapdragon","Pentium","Celeron","Athlon"], a:0},
+    {q:"Qual celular foi o primeiro dobrável da Samsung?", o:["Galaxy Fold","Galaxy Flip","Galaxy Edge","Galaxy Note"], a:0},
+    {q:"Qual é a tecnologia usada para pagamentos por aproximação?", o:["NFC","QR Code","Bluetooth","Infrared"], a:0},
+    {q:"Qual é o nome do sistema de código aberto baseado em Linux usado em celulares?", o:["Android","iOS","HarmonyOS","Windows Phone"], a:0},
+    {q:"Qual foi a primeira rede social a ultrapassar 1 bilhão de usuários?", o:["Facebook","Instagram","Orkut","Twitter"], a:0}
+  ]
+};
 
 let current = 0;
 let score = 0;
-let timer;
 let timerInterval;
 
 function startQuiz(quizNumber){
@@ -224,34 +251,45 @@ function startQuiz(quizNumber){
 }
 
 function showQuestion(quizNumber){
+    const data = quizData[quizNumber];
     const questionEl = document.getElementById('question'+quizNumber);
     const optionsEl = document.getElementById('options'+quizNumber);
     const scoreEl = document.getElementById('score'+quizNumber);
-    const resultEl = document.getElementById('result'+quizNumber);
 
     optionsEl.innerHTML='';
-    questionEl.textContent = quizData[current].q;
+    questionEl.textContent = data[current].q;
 
-    quizData[current].o.forEach((option, index)=>{
+    data[current].o.forEach((option, index)=>{
         const btn = document.createElement('button');
         btn.textContent = option;
-        btn.onclick = () => selectOption(index, quizNumber, questionEl, optionsEl, scoreEl, resultEl);
+        btn.onclick = () => selectOption(index, quizNumber);
         optionsEl.appendChild(btn);
     });
 }
 
-function selectOption(index, quizNumber, questionEl, optionsEl, scoreEl, resultEl){
-    if(index === quizData[current].a) score++;
-    current++;
-    if(current < quizData.length){
-        showQuestion(quizNumber);
-        startTimer(quizNumber);
-    } else finishQuiz(scoreEl, questionEl, optionsEl);
+function selectOption(index, quizNumber){
+    const data = quizData[quizNumber];
+    const optionsEl = document.getElementById('options'+quizNumber).children;
+
+    if(index === data[current].a){
+        score++;
+        optionsEl[index].classList.add("correct");
+    } else {
+        optionsEl[index].classList.add("wrong");
+    }
+
+    setTimeout(()=>{
+        current++;
+        if(current < data.length){
+            showQuestion(quizNumber);
+            startTimer(quizNumber);
+        } else finishQuiz(quizNumber);
+    }, 800);
 }
 
 function startTimer(quizNumber){
     clearInterval(timerInterval);
-    let timerVal = 30;
+    let timerVal = (quizNumber === 1 ? 20 : 30);
     const timerEl = document.getElementById('timer'+quizNumber);
     timerEl.textContent = timerVal+'s';
     timerInterval = setInterval(()=>{
@@ -260,22 +298,26 @@ function startTimer(quizNumber){
         if(timerVal <= 0){
             clearInterval(timerInterval);
             current++;
-            if(current < quizData.length) showQuestion(quizNumber);
-            else finishQuiz(document.getElementById('score'+quizNumber), document.getElementById('question'+quizNumber), document.getElementById('options'+quizNumber));
+            if(current < quizData[quizNumber].length) showQuestion(quizNumber);
+            else finishQuiz(quizNumber);
         }
     },1000);
 }
 
-function finishQuiz(scoreEl, questionEl, optionsEl){
+function finishQuiz(quizNumber){
+    const data = quizData[quizNumber];
+    const questionEl = document.getElementById('question'+quizNumber);
+    const optionsEl = document.getElementById('options'+quizNumber);
+    const scoreEl = document.getElementById('score'+quizNumber);
+
     optionsEl.innerHTML='';
     questionEl.textContent = "Fim do Quiz!";
     scoreEl.style.display='block';
-    scoreEl.querySelector('p')?.remove();
-    const p = document.createElement('p');
-    p.textContent = `Você acertou ${score} de ${quizData.length} perguntas`;
-    scoreEl.appendChild(p);
+    scoreEl.innerHTML = `<p>Você acertou ${score} de ${data.length} perguntas</p>
+    <button class="restart-btn" onclick="startQuiz(${quizNumber})">Recomeçar</button>`;
 }
 </script>
 
 </body>
 </html>
+
