@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -122,7 +122,10 @@ header p { color: #7fdbff; font-size:1.2em; margin-top:10px; }
 .quiz-container { display:none; margin-top:15px; }
 .options button { display:block; width:100%; margin:8px 0; padding:10px; border-radius:6px; border:none; cursor:pointer; font-size:1em; }
 
-/* Timer futurista em barra */
+/* Timer */
+.timer { margin:10px 0; font-weight:bold; color:#facc15; text-shadow: 0 0 5px #facc15; }
+
+/* Barra de timer futurista */
 .timer-bar-container {
     width: 100%;
     height: 8px;
@@ -276,7 +279,8 @@ let timerInterval;
 function startQuiz(quizNumber){
     current = 0;
     score = 0;
-    document.getElementById('quiz'+quizNumber).style.display='block';
+    const quizEl = document.getElementById('quiz'+quizNumber);
+    quizEl.style.display='block';
     showQuestion(quizNumber);
 }
 
@@ -287,16 +291,15 @@ function showQuestion(quizNumber){
         finishQuiz(quizNumber);
         return;
     }
+
     const questionEl = document.getElementById('question'+quizNumber);
     const optionsEl = document.getElementById('options'+quizNumber);
     const scoreEl = document.getElementById('score'+quizNumber);
-    const timerBar = document.getElementById('timerBar'+quizNumber);
+    const timerBarEl = document.getElementById('timerBar'+quizNumber);
 
     optionsEl.innerHTML='';
     questionEl.textContent = data[current].q;
     scoreEl.style.display = 'none';
-    timerBar.style.width = '100%';
-    timerBar.classList.remove('alert');
 
     data[current].o.forEach((option, index)=>{
         const btn = document.createElement('button');
@@ -305,6 +308,9 @@ function showQuestion(quizNumber){
         optionsEl.appendChild(btn);
     });
 
+    timerBarEl.style.width = '100%';
+    timerBarEl.classList.remove('alert');
+
     startTimer(quizNumber);
 }
 
@@ -312,6 +318,7 @@ function selectOption(index, quizNumber){
     clearInterval(timerInterval);
     const data = quizData[quizNumber];
     const optionsEl = document.getElementById('options'+quizNumber).children;
+    const timerBarEl = document.getElementById('timerBar'+quizNumber);
 
     if(index === data[current].a){
         score++;
@@ -321,6 +328,8 @@ function selectOption(index, quizNumber){
         optionsEl[data[current].a].classList.add("correct");
     }
 
+    timerBarEl.style.width = '0%';
+
     setTimeout(()=>{
         current++;
         showQuestion(quizNumber);
@@ -329,40 +338,11 @@ function selectOption(index, quizNumber){
 
 function startTimer(quizNumber){
     const timerEl = document.getElementById('timer'+quizNumber);
-    const timerBar = document.getElementById('timerBar'+quizNumber);
-    let timerVal = (quizNumber===1 ? 20 : 30);
+    const timerBarEl = document.getElementById('timerBar'+quizNumber);
+    let timerVal = (quizNumber === 1 ? 20 : 30);
     timerEl.textContent = timerVal+'s';
-    timerBar.style.width = '100%';
-    timerBar.classList.remove('alert');
 
     timerInterval = setInterval(()=>{
         timerVal--;
         timerEl.textContent = timerVal+'s';
-        let percent = (timerVal/(quizNumber===1?20:30))*100;
-        timerBar.style.width = percent+'%';
-
-        if(timerVal <= 5){
-            timerBar.classList.add('alert');
-        }
-
-        if(timerVal <= 0){
-            clearInterval(timerInterval);
-            selectOption(-1, quizNumber);
-        }
-    },1000);
-}
-
-function finishQuiz(quizNumber){
-    clearInterval(timerInterval);
-    const data = quizData[quizNumber];
-    const questionEl = document.getElementById('question'+quizNumber);
-    const optionsEl = document.getElementById('options'+quizNumber);
-    const scoreEl = document.getElementById('score'+quizNumber);
-
-    optionsEl.innerHTML='';
-    questionEl.textContent = "Fim do Quiz!";
-    scoreEl.style.display='block';
-    let message = score/data.length >= 0.7 ? 'Parabéns! Você mandou muito bem!' : 'Não desista, tente novamente!';
-    scoreEl.innerHTML = `<p>Você acert
-
-   
+        timerBar
