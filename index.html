@@ -188,7 +188,7 @@ footer a { color:#7fdbff; margin:0 10px; }
     <!-- Quiz 1 -->
     <div class="card quiz-card">
         <h3>Assuntos Atuais</h3>
-        <img src="assets/quiz-thumbnail.jpg" alt="Thumbnail do quiz sobre Assuntos Atuais" class="quiz-thumbnail">
+        <img src="assets/quiz-thumbnail.jpg" alt=" Assuntos Atuais" class="quiz-thumbnail">
         <button onclick="startQuiz(1)">Responder</button>
         <div id="quiz1" class="quiz-container">
             <div class="timer-bar-container">
@@ -204,7 +204,7 @@ footer a { color:#7fdbff; margin:0 10px; }
     <!-- Quiz 2 -->
     <div class="card quiz-card">
         <h3>Celular & Tecnologia</h3>
-        <img src="assets/quiz-thumbnail.jpg" alt="Thumbnail do quiz sobre Celular e Tecnologia" class="quiz-thumbnail">
+        <img src="assets/quiz-thumbnail.jpg" alt=" Celular e Tecnologia" class="quiz-thumbnail">
         <button onclick="startQuiz(2)">Responder</button>
         <div id="quiz2" class="quiz-container">
             <div class="timer-bar-container">
@@ -259,90 +259,4 @@ const quizData = {
     {q:"Qual é a maior loja de aplicativos para Android?", o:["Google Play","App Store","Galaxy Store","Huawei AppGallery"], a:0},
     {q:"Qual celular popularizou o reconhecimento facial em 2017?", o:["iPhone X","Samsung S9","Motorola Z","Huawei P20"], a:0},
     {q:"Qual empresa comprou a Nokia em 2014?", o:["Microsoft","Google","Samsung","Sony"], a:0},
-    {q:"O que significa a sigla 'IMEI'?", o:["Identidade Internacional de Equipamento Móvel","Internet Mobile Exchange Identifier","Internal Mobile Electronic ID","Identificação Modular Externa Inteligente"], a:0},
-    {q:"Qual dessas marcas é chinesa?", o:["Xiaomi","Apple","Nokia","Sony"], a:0},
-    {q:"Em que ano foi lançado o WhatsApp?", o:["2009","2011","2013","2007"], a:0},
-    {q:"Qual rede social pertence ao grupo Meta?", o:["Instagram","TikTok","Twitter","Snapchat"], a:0},
-    {q:"O que significa 'Cloud Computing'?", o:["Computação em Nuvem","Computação Rápida","Computador Pessoal","Rede Física"], a:0},
-    {q:"Qual processador é usado em grande parte dos smartphones Android?", o:["Snapdragon","Pentium","Celeron","Athlon"], a:0},
-    {q:"Qual celular foi o primeiro dobrável da Samsung?", o:["Galaxy Fold","Galaxy Flip","Galaxy Edge","Galaxy Note"], a:0},
-    {q:"Qual é a tecnologia usada para pagamentos por aproximação?", o:["NFC","QR Code","Bluetooth","Infrared"], a:0},
-    {q:"Qual é o nome do sistema de código aberto baseado em Linux usado em celulares?", o:["Android","iOS","HarmonyOS","Windows Phone"], a:0},
-    {q:"Qual foi a primeira rede social a ultrapassar 1 bilhão de usuários?", o:["Facebook","Instagram","Orkut","Twitter"], a:0}
-  ]
-};
-
-let current = 0;
-let score = 0;
-let timerInterval;
-
-function startQuiz(quizNumber){
-    current = 0;
-    score = 0;
-    const quizEl = document.getElementById('quiz'+quizNumber);
-    quizEl.style.display='block';
-    showQuestion(quizNumber);
-}
-
-function showQuestion(quizNumber){
-    clearInterval(timerInterval);
-    const data = quizData[quizNumber];
-    if(current >= data.length){
-        finishQuiz(quizNumber);
-        return;
-    }
-
-    const questionEl = document.getElementById('question'+quizNumber);
-    const optionsEl = document.getElementById('options'+quizNumber);
-    const scoreEl = document.getElementById('score'+quizNumber);
-    const timerBarEl = document.getElementById('timerBar'+quizNumber);
-
-    optionsEl.innerHTML='';
-    questionEl.textContent = data[current].q;
-    scoreEl.style.display = 'none';
-
-    data[current].o.forEach((option, index)=>{
-        const btn = document.createElement('button');
-        btn.textContent = option;
-        btn.onclick = () => selectOption(index, quizNumber);
-        optionsEl.appendChild(btn);
-    });
-
-    timerBarEl.style.width = '100%';
-    timerBarEl.classList.remove('alert');
-
-    startTimer(quizNumber);
-}
-
-function selectOption(index, quizNumber){
-    clearInterval(timerInterval);
-    const data = quizData[quizNumber];
-    const optionsEl = document.getElementById('options'+quizNumber).children;
-    const timerBarEl = document.getElementById('timerBar'+quizNumber);
-
-    if(index === data[current].a){
-        score++;
-        optionsEl[index].classList.add("correct");
-    } else {
-        if(index >= 0) optionsEl[index].classList.add("wrong");
-        optionsEl[data[current].a].classList.add("correct");
-    }
-
-    timerBarEl.style.width = '0%';
-
-    setTimeout(()=>{
-        current++;
-        showQuestion(quizNumber);
-    }, 1000);
-}
-
-function startTimer(quizNumber){
-    const timerEl = document.getElementById('timer'+quizNumber);
-    const timerBarEl = document.getElementById('timerBar'+quizNumber);
-    let timerVal = (quizNumber === 1 ? 20 : 30);
-    timerEl.textContent = timerVal+'s';
-
-    timerInterval = setInterval(()=>{
-        timerVal--;
-        timerEl.textContent = timerVal+'s';
-        timerBar
+    {q:"O que significa a sigla 'IMEI'?", o:["Identidade Internacional de Equipamento Móvel","Internet Mobile Excha]()
